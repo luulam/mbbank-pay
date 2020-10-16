@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
-
 import HomeContainer from "containers/home/";
 
 export default function BasicExample() {
