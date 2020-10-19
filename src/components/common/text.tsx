@@ -1,10 +1,9 @@
 import React from "react";
-import Styled from "./view.style";
-import { Typography } from "antd";
-const { Text } = Typography;
+import Styled from "./text.style";
 
 const TextCommon = (props: any) => {
-  return <Text {...props}></Text>;
+  const { children } = props;
+  return <Styled {...props}>{children}</Styled>;
 };
 
-export default Styled(TextCommon);
+export default TextCommon;

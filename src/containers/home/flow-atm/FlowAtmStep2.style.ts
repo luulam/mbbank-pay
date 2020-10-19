@@ -63,7 +63,8 @@ const Styles = styled.div`
     background: #ffffff;
 
     span {
-      font-weight: 700;
+      font-size: 18px;
+      font-weight: bold;
     }
   }
   .btn-submit {

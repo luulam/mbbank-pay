@@ -1,9 +1,13 @@
-import React, { Component } from "react";
-import { Button } from "antd";
+import React from "react";
 import Styled from "./button.style";
 
 const ButtonCommon = (props: any) => {
-  return <Button {...props}></Button>;
+  const { children } = props;
+  return (
+    <Styled type="primary" {...props}>
+      {children}
+    </Styled>
+  );
 };
 
-export default Styled(ButtonCommon);
+export default ButtonCommon;

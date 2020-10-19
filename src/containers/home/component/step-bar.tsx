@@ -1,45 +1,42 @@
-import React, { useState } from "react";
+import React from "react";
 import Styled from "./step-bar.style";
-
-import { Layout, Steps, Typography } from "antd";
-const { Text } = Typography;
-
-const StepBar = () => {
-  const [current, setCurrent] = useState(0);
+import { View, Text, Image } from "components";
+import images from "assets/images";
+const StepBar = ({ current = 0 }: any) => {
+  console.log("current", current);
   const listStep = [
     { name: "Loại thanh toán" },
     { name: "Nhập thông tin" },
     { name: "Xác thực thông tin" },
   ];
-
+  function _icState(index: number): any {
+    if (index < current) return images.icStepSuccess;
+    else if (index === current) return images.icStepAction;
+    else return images.icStepPendding;
+  }
   return (
     <Styled>
-      <div className="ctn-step">
+      <View className="ctn-step">
+        {listStep.map((value, index) => (
+          <>
+            <Image className="" src={_icState(index)} />
+            {index < listStep.length - 1 ? (
+              <View className="ctn-step-line" />
+            ) : undefined}
+          </>
+        ))}
+      </View>
+      <View className="ctn-name">
         {listStep.map((value, index) => {
           return (
-            <>
-              <div
-                className="ctn-step-circle"
-                style={{ background: index <= current ? "blue" : "gray" }}
-              ></div>
-
-              {index < listStep.length - 1 ? (
-                <div className="ctn-step-line" />
-              ) : undefined}
-            </>
-          );
-        })}
-      </div>
-      <div className="ctn-name">
-        {listStep.map((value) => {
-          return (
-            <div className="ctn-title">
+            <View className="ctn-title" key={index}>
               <Text>{value.name}</Text>
-            </div>
+            </View>
           );
         })}
-      </div>
+      </View>
     </Styled>
   );
 };
+
 export default StepBar;

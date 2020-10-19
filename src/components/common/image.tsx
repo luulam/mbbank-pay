@@ -1,22 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import PropTypes from "prop-types";
 import Styled from "./image.style";
 
-const ImageCommon = ({
-  className,
-  src,
-  srcDefault,
-  alt,
-  style,
-  styleWrap,
-}: any) => {
-  const onError = (event: any) => {
-    return (event.target.src = srcDefault);
-  };
+const ImageCommon = (props: any) => {
+  const {} = props;
+  // const onError = (event: any) => {
+  //   return (event.target.src = srcDefault);
+  // };
 
-  return (
-    <img onError={onError} src={src || srcDefault} alt={alt} style={style} />
-  );
+  return <Styled {...props}></Styled>;
 };
 
 ImageCommon.defaultProps = {
@@ -30,4 +22,4 @@ ImageCommon.propTypes = {
   srcDefault: PropTypes.string,
 };
 
-export default Styled(ImageCommon);
+export default ImageCommon;

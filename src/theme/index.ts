@@ -1,4 +1,5 @@
 import colors from "./colors";
+import fonts from "./fonts";
 
 export const mediaScreen = {
   xs: "480px",
@@ -20,4 +21,4 @@ export const spacing = [
   "64px",
 ];
 
-export { colors };
+export { colors, fonts };

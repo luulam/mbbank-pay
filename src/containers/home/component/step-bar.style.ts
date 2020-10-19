@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { spacing } from "theme";
 
-export default styled.div`
+const Styles = styled.div`
   display: flex;
   /* align-items: center; */
   margin-top: ${spacing[6]};
@@ -16,6 +16,11 @@ export default styled.div`
     align-items: center;
     margin-left: ${spacing[4]};
     margin-right: ${spacing[4]};
+
+    img {
+      width: 40px;
+      height: 40px;
+    }
   }
   .ctn-step-circle {
     width: 40px;
@@ -42,3 +47,5 @@ export default styled.div`
     }
   }
 `;
+
+export default Styles;

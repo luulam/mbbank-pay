@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { Typography } from "antd";
-const { Text } = Typography;
+const { Title } = Typography;
 
-const Styles = styled(Text)``;
+const Styles = styled(Title)``;
 
 export default Styles;

@@ -14,7 +14,7 @@ export const Green = "#2ad1c8";
 export const Transparent = "#ffffff00";
 
 export default {
-  Primary: "#5F259F",
+  Primary: "#141ed2",
   Secondary: "#2AD2C9",
   Blue: "#3980e4",
   DarkBlue: "#3d75c4",

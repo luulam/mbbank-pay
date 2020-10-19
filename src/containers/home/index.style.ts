@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import { mediaScreen } from "theme";
 
-const Styles = (View: any) => styled(View)`
+const Styles = styled.div`
   display: flex;
+  flex: 1;
 
   .content {
     display: flex;

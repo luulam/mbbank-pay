@@ -1,25 +1,32 @@
-import React from "react";
+import React, { useState } from "react";
 import Styled from "./index.style";
+import { View } from "components";
 import HeaderBar from "./component/header-bar";
 import StepBar from "./component/step-bar";
 import FlowAtmStep1 from "./flow-atm/FlowAtmStep1";
-import { Layout, Steps } from "antd";
+import { Layout } from "antd";
 const { Content } = Layout;
 
 const HomeContainer = () => {
-  return (
-    <Layout>
-      <HeaderBar />
-      <Content className="content">
-        <div className="form" style={{}}>
-          <StepBar />
+  const [curentTab, setCurentTab] = useState(0);
 
-          <div className="form-input">
-            <FlowAtmStep1 />
-          </div>
-        </div>
-      </Content>
-    </Layout>
+  const _onNextStep = (curent: number) => {
+    setCurentTab(curent + 1);
+  };
+  return (
+    <Styled>
+      <Layout>
+        <HeaderBar />
+        <Content className="content">
+          <View className="form" style={{}}>
+            <StepBar current={curentTab} />
+            <View className="form-input">
+              <FlowAtmStep1 onNext={_onNextStep} />
+            </View>
+          </View>
+        </Content>
+      </Layout>
+    </Styled>
   );
 };
-export default Styled(HomeContainer);
+export default HomeContainer;
