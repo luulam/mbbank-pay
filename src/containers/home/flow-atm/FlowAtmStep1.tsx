@@ -7,8 +7,16 @@ const FlowAtmStep1 = ({ onNext }: any) => {
   const [selectCard, setSelectCard] = useState(0);
 
   const listTypePay = [
-    { name: `Thanh toán qua \nthẻ Atm`, img: images.atm },
-    { name: `Thanh toán qua \nsố tài khoản`, img: images.profile },
+    {
+      name: `Thanh toán qua \nthẻ Atm`,
+      img: images.atm,
+      imgDisable: images.atmDisable,
+    },
+    {
+      name: `Thanh toán qua \nsố tài khoản`,
+      img: images.profile,
+      imgDisable: images.profileDisable,
+    },
   ];
 
   const _onSelectTypePay = (index: number) => {
@@ -18,6 +26,7 @@ const FlowAtmStep1 = ({ onNext }: any) => {
   const _onNextScreen = () => {
     onNext && onNext(0);
   };
+
   return (
     <Styled>
       <View className="ctn-title">
@@ -37,7 +46,10 @@ const FlowAtmStep1 = ({ onNext }: any) => {
               className={`ctn-item ${isSelect ? "ctn-item-select" : ""}`}
               onClick={() => _onSelectTypePay(index)}
             >
-              <Image className={`img-type `} src={value.img} />
+              <Image
+                className={`img-type`}
+                src={isSelect ? value.img : value.imgDisable}
+              />
               <Text>{value.name}</Text>
               <Image
                 className="img-select"

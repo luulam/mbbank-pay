@@ -10,7 +10,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.4.0",
-    "@types/styled-components": "^5.1.4",
     "antd": "^4.7.0",
     "axios": "^0.20.0",
     "husky": "^4.3.0",
@@ -22,6 +21,8 @@
     "prettier": "^2.1.2",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-helmet": "^6.1.0",
+    "react-intl": "^5.8.6",
     "react-router-dom": "^5.2.0",
     "react-scripts": "3.4.3",
     "redux": "^4.0.5",
@@ -40,8 +41,10 @@
     "@types/node": "^12.0.0",
     "@types/react": "^16.9.52",
     "@types/react-dom": "^16.9.0",
+    "@types/react-helmet": "^6.1.0",
     "@types/react-router-dom": "^5.1.6",
-    "@types/seamless-immutable": "^7.1.13"
+    "@types/seamless-immutable": "^7.1.13",
+    "@types/styled-components": "^5.1.4"
   },
   "eslintConfig": {
     "extends": "react-app"

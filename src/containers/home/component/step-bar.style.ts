@@ -18,16 +18,11 @@ const Styles = styled.div`
     margin-right: ${spacing[4]};
 
     img {
-      width: 40px;
-      height: 40px;
+      width: 43px;
+      height: 43px;
     }
   }
-  .ctn-step-circle {
-    width: 40px;
-    height: 40px;
-    border-radius: 20px;
-    background: gray;
-  }
+
   .ctn-step-line {
     flex-grow: 1;
     border-bottom: 2px dotted black;

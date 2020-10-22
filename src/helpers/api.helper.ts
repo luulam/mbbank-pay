@@ -5,7 +5,7 @@ import axios, {
   AxiosRequestConfig,
 } from "axios";
 // import * as qs from "query-string"
-import CONFIG from "config";
+import CONFIG from "constants/config";
 import AuthHelper from "helpers/auth.helper";
 import { cleanKeyNull } from "./util.helper";
 import * as _ from "lodash";

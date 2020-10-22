@@ -1,6 +1,6 @@
 import React, { useState } from "react";
-import Styled from "./FlowAtmStep1.style";
-import { Button, Text, View, Title, Image } from "components";
+import Styled from "./FlowAtmStep2.style";
+import { Button, Text, View, Title, Image, Input } from "components";
 import images from "assets/images";
 
 const FlowAtmStep1 = ({ onNext }: any) => {
@@ -16,36 +16,45 @@ const FlowAtmStep1 = ({ onNext }: any) => {
   };
 
   const _onNextScreen = () => {
-    onNext && onNext(0);
+    onNext && onNext(1);
   };
+
   return (
     <Styled>
       <View className="ctn-title">
-        <Title>Thanh toán</Title>
+        <Title level={4}>Thanh toán qua thẻ ATM</Title>
         <Text>
           {
-            "Chào mừng bạn đến với trang thanh toán điện tử của MB \nVui lòng chọn một trong hai hình thức thanh toán"
+            "Vui lòng điều thông tin thẻ ngân hàng của bạn vào các trường để tiếp tục thanh toán"
           }
         </Text>
       </View>
-
-      <View className="ctn-select-box">
-        {listTypePay.map((value, index) => {
-          let isSelect = index === selectCard;
-          return (
-            <View
-              className={`ctn-item ${isSelect ? "ctn-item-select" : ""}`}
-              onClick={() => _onSelectTypePay(index)}
-            >
-              <Image className={`img-type `} src={value.img} />
-              <Text>{value.name}</Text>
-              <Image
-                className="img-select"
-                src={isSelect ? images.icSelectOn : images.icSelectOff}
-              />
-            </View>
-          );
-        })}
+      <View className={"ctn-form"}>
+        <View className={"ctn-row"}>
+          <Text className={"flex1"}>Số thẻ</Text>
+          <View className={"flex2"}>
+            <Input className={"flex2"} placeholder="Nhập số thẻ" />
+          </View>
+        </View>
+        <View className={"ctn-row"}>
+          <Text className={"flex1"}>Ngày phát hành</Text>
+          <View className={"flex2"}>
+            <Input className={"flex2"} placeholder="Nhập số thẻ" />
+          </View>
+        </View>
+        <View className={"ctn-row"}>
+          <Text className={"flex1"}>Tên chủ thẻ</Text>
+          <View className={"flex2"}>
+            <Input className={"flex2"} placeholder="Nhập số thẻ" />
+          </View>
+        </View>
+        <View className={"ctn-row"}>
+          <Text className={"flex1"}>Mã xác nhận</Text>
+          <View className={"flex2 row"}>
+            <Input className={"flex2"} placeholder="Nhập số thẻ" />
+            <Input className={"flex1"} placeholder="Nhập số thẻ" />
+          </View>
+        </View>
       </View>
 
       <Button

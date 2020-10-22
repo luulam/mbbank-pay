@@ -1,19 +1,4 @@
-export const Primary = "#284a93";
-export const Secondary = "#cee3fb";
-export const Blue = "#3980e4";
-export const DarkBlue = "#3d75c4";
-export const White = "#fff";
-export const Black = "#000";
-export const Grey = "#64737D";
-export const LightGrey = "#ddd";
-export const LighterGrey = "#d6d6d6";
-export const Yellow = "#f7b500";
-export const Red = "#e02020";
-export const Purple = "#5f259f";
-export const Green = "#2ad1c8";
-export const Transparent = "#ffffff00";
-
-export default {
+const colors = {
   Primary: "#141ed2",
   Secondary: "#2AD2C9",
   Blue: "#3980e4",
@@ -28,8 +13,10 @@ export default {
   Purple: "#5f259f",
   Green: "#2ad1c8",
   Shadow: "#223746B3",
-  Transparent,
+  Transparent: "#ffffff00",
 };
+
+export default colors;
 
 // 100%	FF	255
 // 99%	FC	252

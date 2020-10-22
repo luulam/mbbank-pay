@@ -46,7 +46,7 @@ const Styles = styled.div`
       text-align: center;
     }
     .img-type {
-      height: 50px;
+      height: 71px;
       margin-top: ${spacing[4]};
     }
 
@@ -63,7 +63,7 @@ const Styles = styled.div`
     background: #ffffff;
 
     span {
-      font-weight: 700;
+      /* font-weight: 700; */
     }
   }
   .btn-submit {
