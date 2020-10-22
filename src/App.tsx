@@ -4,6 +4,7 @@ import GlobalStyle from "theme/global.styles";
 import HomeContainer from "containers/home";
 import { Helmet } from "react-helmet";
 import styled from "styled-components";
+import AppContainer from "containers/AppContainer";
 
 const AppWrapper = styled.div`
   display: flex;
@@ -25,9 +26,7 @@ export default function App() {
             content="width=device-width, initial-scale=1.0"
           ></meta>
         </Helmet>
-        <Switch>
-          <Route exact path="/" component={HomeContainer} />
-        </Switch>
+        <AppContainer />
       </AppWrapper>
 
       <GlobalStyle />
