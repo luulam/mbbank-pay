@@ -10,16 +10,4 @@ const ImageCommon = (props: any) => {
 
   return <Styled {...props}></Styled>;
 };
-
-ImageCommon.defaultProps = {
-  className: "wrap-image",
-  alt: "",
-};
-
-ImageCommon.propTypes = {
-  className: PropTypes.string,
-  src: PropTypes.string,
-  srcDefault: PropTypes.string,
-};
-
 export default ImageCommon;

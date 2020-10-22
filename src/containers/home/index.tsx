@@ -14,13 +14,17 @@ const HomeContainer = () => {
   const _onNextStep = (curent: number) => {
     setCurentTab(curent + 1);
   };
+  const _onGoBack = () => {
+    if (curentTab < 1) return;
+    setCurentTab(curentTab - 1);
+  };
 
   const _renderTab = () => {
     switch (curentTab) {
       case 0:
         return <FlowAtmStep1 onNext={_onNextStep} />;
       case 1:
-        return <FlowAtmStep2 onNext={_onNextStep} />;
+        return <FlowAtmStep2 onNext={_onNextStep} goBack={_onGoBack} />;
     }
   };
 

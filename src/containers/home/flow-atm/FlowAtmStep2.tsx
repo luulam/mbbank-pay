@@ -3,9 +3,9 @@ import Styled from "./FlowAtmStep2.style";
 import { Button, Text, View, Title, Image, Input } from "components";
 import images from "assets/images";
 
-const FlowAtmStep1 = ({ onNext }: any) => {
+const FlowAtmStep1 = ({ onNext, goBack }: any) => {
   const [selectCard, setSelectCard] = useState(0);
-
+  const [msgErrorNumberCard, setMsgErrorNumberCard] = useState("");
   const listTypePay = [
     { name: `Thanh toán qua \nthẻ Atm`, img: images.atm },
     { name: `Thanh toán qua \nsố tài khoản`, img: images.profile },
@@ -19,6 +19,8 @@ const FlowAtmStep1 = ({ onNext }: any) => {
     onNext && onNext(1);
   };
 
+  const onChangeNumberCard = (value: any) => {};
+
   return (
     <Styled>
       <View className="ctn-title">
@@ -31,40 +33,59 @@ const FlowAtmStep1 = ({ onNext }: any) => {
       </View>
       <View className={"ctn-form"}>
         <View className={"ctn-row"}>
-          <Text className={"flex1"}>Số thẻ</Text>
-          <View className={"flex2"}>
-            <Input className={"flex2"} placeholder="Nhập số thẻ" />
+          <Text>Số thẻ</Text>
+          <View>
+            <Input
+              placeholder="Nhập số thẻ"
+              msgError={msgErrorNumberCard}
+              onChangeValue={onChangeNumberCard}
+            />
           </View>
         </View>
         <View className={"ctn-row"}>
-          <Text className={"flex1"}>Ngày phát hành</Text>
-          <View className={"flex2"}>
-            <Input className={"flex2"} placeholder="Nhập số thẻ" />
+          <Text>Ngày phát hành:</Text>
+          <View>
+            <Input placeholder="DD/MM/YYYY" />
           </View>
         </View>
         <View className={"ctn-row"}>
-          <Text className={"flex1"}>Tên chủ thẻ</Text>
-          <View className={"flex2"}>
-            <Input className={"flex2"} placeholder="Nhập số thẻ" />
+          <Text>Tên chủ thẻ:</Text>
+          <View>
+            <Input placeholder="Nhập tên không đấu" />
           </View>
         </View>
         <View className={"ctn-row"}>
-          <Text className={"flex1"}>Mã xác nhận</Text>
-          <View className={"flex2 row"}>
-            <Input className={"flex2"} placeholder="Nhập số thẻ" />
-            <Input className={"flex1"} placeholder="Nhập số thẻ" />
+          <Text>Mã xác nhận:</Text>
+          <View>
+            <Input style={{ flex: 2 }} placeholder="Nhập số thẻ" />
+            <Input style={{ flex: 1 }} placeholder="" disabled />
           </View>
+        </View>
+
+        <View className={"ctn-change-number"}>
+          <Text>Đổi mã</Text>
+        </View>
+
+        <View className={"ctn-policy"}>
+          <Text>Điều khoản & điều kiện sử dụng dịch vụ của MB</Text>
         </View>
       </View>
 
-      <Button
-        className="btn-submit"
-        onClick={() => {
-          _onNextScreen();
-        }}
-      >
-        Tiếp tục
-      </Button>
+      <View className={"ctn-navigate"}>
+        <Image src={images.icBack} onClick={goBack} />
+        <Text className="back" onClick={goBack}>
+          Quay về
+        </Text>
+
+        <Button
+          className="btn-submit"
+          onClick={() => {
+            _onNextScreen();
+          }}
+        >
+          Tiếp tục
+        </Button>
+      </View>
     </Styled>
   );
 };

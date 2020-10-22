@@ -21,6 +21,8 @@ export const spacing = [
   "32px",
   "48px",
   "64px",
+  "76px",
+  "88px",
 ];
 
 export { colors, fonts, metric };
