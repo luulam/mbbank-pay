@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Styled from "./index.style";
-import { View } from "components";
+import { View, Tab } from "components";
 import HeaderBar from "./component/header-bar";
 import StepBar from "./component/step-bar";
 import FlowAtmStep1 from "./flow-atm/FlowAtmStep1";
@@ -19,15 +19,6 @@ const HomeContainer = () => {
     setCurentTab(curentTab - 1);
   };
 
-  const _renderTab = () => {
-    switch (curentTab) {
-      case 0:
-        return <FlowAtmStep1 onNext={_onNextStep} />;
-      case 1:
-        return <FlowAtmStep2 onNext={_onNextStep} goBack={_onGoBack} />;
-    }
-  };
-
   return (
     <Styled>
       <Layout>
@@ -35,7 +26,10 @@ const HomeContainer = () => {
         <Content className="content">
           <View className="form" style={{}}>
             <StepBar current={curentTab} />
-            <View className="form-input">{_renderTab()}</View>
+            <Tab current={curentTab} className="form-input">
+              <FlowAtmStep1 onNext={_onNextStep} />
+              <FlowAtmStep2 onNext={_onNextStep} goBack={_onGoBack} />
+            </Tab>
           </View>
         </Content>
       </Layout>
