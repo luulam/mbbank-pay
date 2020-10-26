@@ -1,9 +1,8 @@
 import React from "react";
 import Styled from "./button.style";
 
-const ButtonCommon = (props) => {
-  const { children } = props;
-  return <Styled {...props}>{children}</Styled>;
+const ButtonCommon = ({ children, ...restProps }) => {
+  return <Styled {...restProps}>{children}</Styled>;
 };
 
 export default ButtonCommon;

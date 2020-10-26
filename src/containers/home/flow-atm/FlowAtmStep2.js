@@ -4,22 +4,15 @@ import { Button, Text, View, Title, Image, Input } from "components";
 import images from "assets/images";
 
 const FlowAtmStep1 = ({ onNext, goBack }) => {
-  const [selectCard, setSelectCard] = useState(0);
   const [msgErrorNumberCard, setMsgErrorNumberCard] = useState("");
-  const listTypePay = [
-    { name: `Thanh toán qua \nthẻ Atm`, img: images.atm },
-    { name: `Thanh toán qua \nsố tài khoản`, img: images.profile },
-  ];
-
-  const _onSelectTypePay = (index) => {
-    setSelectCard(index);
-  };
 
   const _onNextScreen = () => {
     onNext && onNext(1);
   };
 
-  const onChangeNumberCard = (value) => { };
+  const onChangeNumberCard = (value) => {
+    setMsgErrorNumberCard("")
+  };
 
   return (
     <Styled>

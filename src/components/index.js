@@ -1,11 +1,7 @@
-import View from "./common/view";
-import Button from "./common/button";
-import Image from "./common/image";
-import Text from "./common/text";
-import Title from "./common/title";
-import Input from "./common/input";
-import Tab from "./common/tab";
-
-export { View, Button, Image, Text, Title, Input, Tab };
-
-// export default { View, Button, Image, Text, Title, Input, Tab }
+export { default as View } from "./common/view"
+export { default as Button } from "./common/button"
+export { default as Image } from "./common/image"
+export { default as Text } from "./common/text"
+export { default as Title } from "./common/title"
+export { default as Input } from "./common/input"
+export { default as Tab } from "./common/tab"

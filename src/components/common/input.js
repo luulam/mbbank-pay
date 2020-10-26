@@ -1,15 +1,14 @@
 import React from "react";
 import Styled from "./input.style";
 
-const InputCommon = (props) => {
-  const {
-    children,
-    msgError,
-    placeholder,
-    onChangeValue,
-    style,
-    disabled,
-  } = props;
+const InputCommon = ({
+  children,
+  msgError,
+  placeholder,
+  onChangeValue,
+  style,
+  disabled,
+  ...restProps }) => {
   return (
     <Styled style={style}>
       <input

@@ -14,9 +14,9 @@ const colors = {
   Green: "#2ad1c8",
   Shadow: "#223746B3",
   Transparent: "#ffffff00",
-};
+}
 
-export default colors;
+export default colors
 
 // 100%	FF	255
 // 99%	FC	252

@@ -1,6 +1,6 @@
-import colors from "./colors";
-import fonts from "./fonts";
-import metric from "./metric";
+export { default as colors } from "./colors"
+export { default as fonts } from "./fonts"
+export { default as metric } from "./metric"
 
 export const mediaScreen = {
   xs: "480px",
@@ -10,7 +10,7 @@ export const mediaScreen = {
   lg: "992px",
   xl: "1200px",
   xxl: "1600px",
-};
+}
 
 export const spacing = [
   "4px",
@@ -23,6 +23,5 @@ export const spacing = [
   "64px",
   "76px",
   "88px",
-];
+]
 
-export { colors, fonts, metric };

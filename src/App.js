@@ -1,34 +1,14 @@
-import React from "react";
-import { BrowserRouter as Router } from "react-router-dom";
-import GlobalStyle from "theme/global.styles";
-import { Helmet } from "react-helmet";
-import styled from "styled-components";
-import AppContainer from 'containers/AppContainer';
+import React from "react"
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom'
+import HomeContainer from "containers/home"
+import * as ROUTES from 'constants/routes'
 
-const AppWrapper = styled.div`
-  display: flex;
-  scale: 1;
-  flex-direction: column;
-  min-height: 100%;
-  margin: 0 auto;
-  padding: 0 0px;
-`;
-
-export default function App() {
+export default function AppContainer() {
   return (
     <Router>
-      <AppWrapper>
-        <Helmet titleTemplate="" defaultTitle="mbbank pay">
-          <meta charSet="UTF-8" />
-          <meta
-            name="viewport"
-            content="width=device-width, initial-scale=1.0"
-          ></meta>
-        </Helmet>
-        <AppContainer />
-      </AppWrapper>
-
-      <GlobalStyle />
+      <Switch>
+        <Route exact path={ROUTES.HOME} component={HomeContainer} />
+      </Switch>
     </Router>
-  );
+  )
 }

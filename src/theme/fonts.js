@@ -5,6 +5,6 @@ const fonts = {
     white: ["#ffffff"],
     black: ["#000000", "#223746", "#60707B"],
   },
-};
+}
 
-export default fonts;
+export default fonts

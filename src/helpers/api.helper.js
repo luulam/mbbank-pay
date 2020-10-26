@@ -1,13 +1,12 @@
 // import * as qs from "query-string"
 import CONFIG from "constants/config";
-import AuthHelper from "helpers/auth.helper";
+import * as AuthHelper from "helpers/auth.helper";
 import { cleanKeyNull } from "./util.helper";
-import * as _ from "lodash";
+import _ from "lodash";
 import axios from 'axios'
 
 // GET TOKEN
-const authHelper = new AuthHelper();
-const profileAuth = authHelper.getProfile();
+const profileAuth = AuthHelper.getProfile();
 const token = _.get(profileAuth, "token", false);
 
 const apiUrl = CONFIG.API_GATEWAY.BASE_URL;
@@ -19,20 +18,20 @@ const api = axios.create({
   },
 });
 
-setTokenAuthorization(token);
-
-function setTokenAuthorization(_token) {
+export const setTokenAuthorization = (_token) => {
   api.defaults.headers.common["Authorization"] = _token
     ? `Bearer ${_token}`
     : "";
 }
 
+setTokenAuthorization(token);
+
 //GET
-function get(url, config) {
+export const GET = (url, config) => {
   config = {
     ...config,
     params: {
-      lang: authHelper.getLanguage(),
+      lang: AuthHelper.getLanguage(),
     },
   };
   cleanKeyNull(config.params);
@@ -49,15 +48,11 @@ function get(url, config) {
 }
 
 //POST
-function post(
-  url,
-  body,
-  config
-) {
+export const POST = (url, body, config) => {
   config = {
     ...config,
     params: {
-      lang: authHelper.getLanguage(),
+      lang: AuthHelper.getLanguage(),
     },
   };
   cleanKeyNull(config.params);
@@ -73,15 +68,11 @@ function post(
 }
 
 //PUT
-function put(
-  url,
-  body,
-  config
-) {
+export const PUT = (url, body, config) => {
   config = {
     ...config,
     params: {
-      lang: authHelper.getLanguage(),
+      lang: AuthHelper.getLanguage(),
     },
   };
   cleanKeyNull(config.params);
@@ -96,15 +87,11 @@ function put(
 }
 
 // PATCH
-function patch(
-  url,
-  body,
-  config
-) {
+export const PATH = (url, body, config) => {
   config = {
     ...config,
     params: {
-      lang: authHelper.getLanguage(),
+      lang: AuthHelper.getLanguage(),
     },
   };
   cleanKeyNull(config.params);
@@ -119,17 +106,13 @@ function patch(
 }
 
 // DELETE
-function _delete(
-  url,
-  config
-) {
+export const DELETE = (url, config) => {
   config = {
     ...config,
     params: {
-      lang: authHelper.getLanguage(),
+      lang: AuthHelper.getLanguage(),
     },
   };
-
   cleanKeyNull(config.params);
 
   const request = api
@@ -141,61 +124,14 @@ function _delete(
   return request;
 }
 
-function sendWithFile(
-  baseUrl = undefined,
-  url,
-  method,
-  body = {},
-  config = {}
-) {
-  // method = method.toLowerCase()
-  // const formData = new FormData()
-  // Object.keys(body).forEach((key) => {
-  //   if (_.isArray(body[key]) === true) {
-  //     body[key].forEach((item) => {
-  //       formData.append(key, item)
-  //     })
-  //   } else {
-  //     formData.append(key, body[key])
-  //   }
-  // })
-  // const configAppend = {
-  //   ...config,
-  //   headers: { "Content-Type": "multipart/form-data", ...config.headers },
-  // }
-  // const request = api[method || "POST"](
-  //   baseUrl ? `${baseUrl}${url}` : url,
-  //   formData,
-  //   configAppend
-  // )
-  //   .then((res) => {
-  //     return mapData(res)
-  //   })
-  //   .catch(mapError)
-  // return request
-}
-
-function postFormData(url, body = {}) {
-  // const formData = new FormData()
-  // Object.keys(body).forEach((key) => {
-  //   formData.append(key, body[key])
-  // })
-  // return api
-  //   .post(url, formData, {
-  //     headers: { "Content-Type": "multipart/form-data" },
-  //   })
-  //   .then(mapData)
-  //   .catch(mapError)
-}
-
 // MAP params response
-function mapData(res) {
+export const mapData = (res) => {
   return res.data;
 }
 
-function mapError(err) {
+export const mapError = (err) => {
   if (err.response && err.response.status === 401) {
-    authHelper.logout();
+    AuthHelper.logout();
     throw err;
   }
 
@@ -203,14 +139,3 @@ function mapError(err) {
     throw err;
   }
 }
-
-export default {
-  get,
-  post,
-  patch,
-  put,
-  delete: _delete,
-  sendWithFile,
-  postFormData,
-  setTokenAuthorization,
-};

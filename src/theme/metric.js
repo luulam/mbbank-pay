@@ -1,2 +1,2 @@
-const metric = {};
-export default metric;
+const metric = {}
+export default metric

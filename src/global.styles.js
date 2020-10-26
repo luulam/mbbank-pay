@@ -5,7 +5,6 @@ const GlobalStyle = createGlobalStyle`
   body {
     height: 100%;
     width: 100%;
-    
     line-height: 1.5;
     background: #f0f2f5;
     margin: 0px;
