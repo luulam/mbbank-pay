@@ -5,29 +5,25 @@ import reportWebVitals from './reportWebVitals'
 import styled from "styled-components"
 import GlobalStyle from "global.styles"
 import { Helmet } from "react-helmet"
-
-const AppWrapper = styled.div`
-  display: flex;
-  scale: 1;
-  flex-direction: column;
-  min-height: 100%;
-  margin: 0 auto;
-  padding: 0 0px;
-`
+import { ThemeProvider } from '@material-ui/core/styles';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import theme from 'theme';
 
 render(
     <React.StrictMode>
-        <GlobalStyle />
-        <AppWrapper>
-            <Helmet titleTemplate="" defaultTitle="MBbank pay">
-                <meta charSet="UTF-8" />
-                <meta
-                    name="viewport"
-                    content="width=device-width, initial-scale=1.0"
-                ></meta>
-            </Helmet>
+        <Helmet titleTemplate="" defaultTitle="MBbank pay">
+            <meta charSet="UTF-8" />
+            <meta
+                name="viewport"
+                content="minimum-scale=1, initial-scale=1, width=device-width"
+            />
+        </Helmet>
+
+        <ThemeProvider theme={theme}>
+            <CssBaseline />
+            <GlobalStyle />
             <App />
-        </AppWrapper>
+        </ThemeProvider>
     </React.StrictMode>, document.getElementById('root'))
 
 // If you want to start measuring performance in your app, pass a function

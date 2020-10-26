@@ -1,34 +1,57 @@
-import React, { useState } from "react";
-import Styled from "./index.style";
-import { View, Tab } from "components";
-import HeaderBar from "./component/header-bar";
-import StepBar from "./component/step-bar";
-import FlowAtmStep1 from "./flow-atm/FlowAtmStep1";
-import FlowAtmStep2 from "./flow-atm/FlowAtmStep2";
+import React, { useState, useRef } from "react"
+import { View, Tab, ModalOtp } from "components"
+import HeaderBar from "./component/header-bar"
+import StepBar from "./component/step-bar"
+import SelectTypePay from './select-type-pay'
+import AtmStep1 from "./flow-atm/atm-step-1"
+import AtmStep2 from "./flow-atm/atm-step-2"
+import AccountStep1 from "./flow-account/account-step-1"
+import AccountStep2 from "./flow-account/account-step-2"
+
+import { Container } from '@material-ui/core/';
+import { makeStyles } from '@material-ui/core/styles';
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    background: "white",
+    borderRadius: "6px"
+  }
+}));
 
 const HomeContainer = () => {
-  const [curentTab, setCurentTab] = useState(0);
+  const classes = useStyles();
+  const modalOtp = useRef();
+  const [curentTab, setCurentTab] = useState(1)
+  const [typePay, setTypePay] = useState(0)
 
   const _onNextStep = (curent) => {
-    setCurentTab(curent + 1);
-  };
+    if (curent === 2) {
+      console.log("modalOtp", modalOtp)
+      modalOtp.current.show()
+    }
+    else setCurentTab(curent + 1)
+  }
   const _onGoBack = () => {
-    if (curentTab < 1) return;
-    setCurentTab(curentTab - 1);
-  };
+    if (curentTab < 1) return
+    setCurentTab(curentTab - 1)
+  }
 
   return (
-    <Styled>
+    <>
       <HeaderBar />
-      <View className="form" style={{}}>
+      <Container maxWidth="sm" >
         <StepBar current={curentTab} />
-        <Tab current={curentTab} className="form-input">
-          <FlowAtmStep1 onNext={_onNextStep} />
-          <FlowAtmStep2 onNext={_onNextStep} goBack={_onGoBack} />
+        <Tab current={curentTab} className={classes.root}>
+          <SelectTypePay onNext={_onNextStep} setTypePay={setTypePay} typePay={typePay} />
+          {typePay === 0 ? <AtmStep1 onNext={_onNextStep} goBack={_onGoBack} /> : <AccountStep1 onNext={_onNextStep} goBack={_onGoBack} />}
+          {typePay === 0 ? <AtmStep2 onNext={_onNextStep} goBack={_onGoBack} /> : <AccountStep2 onNext={_onNextStep} goBack={_onGoBack} />}
         </Tab>
-      </View>
-    </Styled>
-  );
-};
 
-export default HomeContainer;
+        <ModalOtp ref={modalOtp} />
+      </Container>
+    </>
+
+  )
+}
+
+export default HomeContainer

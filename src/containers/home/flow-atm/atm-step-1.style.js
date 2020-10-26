@@ -2,24 +2,12 @@ import styled from "styled-components";
 import { mediaScreen, spacing, fonts } from "theme";
 
 const Styles = styled.div`
-  display: flex;
-  flex-direction: column;
-  /* justify-content: space-between; */
-  /* height: ${mediaScreen.sm}; */
   padding: ${spacing[5]};
-  /* padding-top: ${spacing[6]};
-  padding-bottom: ${spacing[6]}; */
 
   .ctn-title {
     display: flex;
-    /* align-items: flex-start; */
-    /* align-items: center; */
-    /* justify-content: center; */
-    /* flex-direction: column; */
-
     span {
-      /* text-align: center; */
-      /* white-space: pre-line; */
+
     }
   }
 
@@ -29,20 +17,19 @@ const Styles = styled.div`
       flex-direction: row;
       margin-top: 20px;
       align-items: center;
+      flex-grow:3;
 
       span {
         flex: 1;
       }
+    }
 
-      div {
-        flex: 2;
-        flex-direction: row;
+    .flex1 {
+      flex:1;
+    }
 
-        div {
-          margin-left: 10px;
-          margin-right: 10px;
-        }
-      }
+    .flex2{
+      flex:2;
     }
   }
   .ctn-change-number {
@@ -71,7 +58,6 @@ const Styles = styled.div`
   }
 
   .btn-submit {
-    /* align-self: center; */
   }
 `;
 

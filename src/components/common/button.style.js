@@ -10,13 +10,12 @@ const Styles = styled.button`
   border-radius: 8px;
   padding-left: ${spacing[7]};
   padding-right: ${spacing[7]};
-
-  span {
-    font-size: 14px;
-    text-transform: uppercase;
-    color: ${colors.White};
-    font-weight: 500;
-  }
+  font-size: 14px;
+  text-transform: uppercase;
+  color: ${colors.White};
+  font-weight: bold;
+  outline: none;
+  border: none;
 `;
 
 export default Styles;

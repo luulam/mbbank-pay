@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Styled from "./FlowAtmStep2.style";
+import Styled from "./atm-step-1.style";
 import { Button, Text, View, Title, Image, Input } from "components";
 import images from "assets/images";
 
@@ -15,7 +15,7 @@ const FlowAtmStep1 = ({ onNext, goBack }) => {
   };
 
   return (
-    <Styled>
+    <Styled >
       <View className="ctn-title">
         <Title level={4}>Thanh toán qua thẻ ATM</Title>
         <Text>
@@ -27,32 +27,25 @@ const FlowAtmStep1 = ({ onNext, goBack }) => {
       <View className={"ctn-form"}>
         <View className={"ctn-row"}>
           <Text>Số thẻ</Text>
-          <View>
-            <Input
-              placeholder="Nhập số thẻ"
-              msgError={msgErrorNumberCard}
-              onChangeValue={onChangeNumberCard}
-            />
-          </View>
+          <Input
+            style={{ flex: 2 }}
+            placeholder="Nhập số thẻ"
+            msgError={msgErrorNumberCard}
+            onChangeValue={onChangeNumberCard}
+          />
         </View>
+
         <View className={"ctn-row"}>
           <Text>Ngày phát hành:</Text>
-          <View>
-            <Input placeholder="DD/MM/YYYY" />
-          </View>
+          <Input style={{ flex: 2 }} placeholder="DD/MM/YYYY" />
         </View>
         <View className={"ctn-row"}>
           <Text>Tên chủ thẻ:</Text>
-          <View>
-            <Input placeholder="Nhập tên không đấu" />
-          </View>
+          <Input style={{ flex: 2 }} placeholder="Nhập tên không đấu" />
         </View>
         <View className={"ctn-row"}>
           <Text>Mã xác nhận:</Text>
-          <View>
-            <Input style={{ flex: 2 }} placeholder="Nhập số thẻ" />
-            <Input style={{ flex: 1 }} placeholder="" disabled />
-          </View>
+          <Input style={{ flex: 2 }} placeholder="Nhập số thẻ" />
         </View>
 
         <View className={"ctn-change-number"}>

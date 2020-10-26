@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { fonts } from "theme";
+
 export default styled.div`
   display: flex;
   flex-direction: column;
