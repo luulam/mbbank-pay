@@ -1,10 +1,10 @@
-import React, { useImperativeHandle, useState, forwardRef } from "react";
+import React, { useState, forwardRef, useImperativeHandle } from "react";
 import Styled from "./modal-otp.style";
 import Backdrop from "@material-ui/core/Backdrop";
-import OtpInput from "../clone/otp-input";
+import OtpInput from "../otp-input";
 import Button from "../common/button";
 const ViewCommon = ({ children, ...restProps }, ref) => {
-  const [open, setOpen] = useState(false);
+  const [open, setOpen] = useState(true);
   const [valueOtp, setValueOtp] = useState("");
   const handleOpen = () => {
     setOpen(true);

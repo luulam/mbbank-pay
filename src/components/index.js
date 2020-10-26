@@ -13,4 +13,4 @@ export { default as ModalOtp } from "./modal/modal-otp"
 
 
 //clone
-export { default as OtpInput } from "./clone/otp-input"
+export { default as OtpInput } from "./otp-input"

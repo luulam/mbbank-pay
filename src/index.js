@@ -10,7 +10,7 @@ import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from 'theme';
 
 render(
-    <React.StrictMode>
+    <>
         <Helmet titleTemplate="" defaultTitle="MBbank pay">
             <meta charSet="UTF-8" />
             <meta
@@ -24,7 +24,7 @@ render(
             <GlobalStyle />
             <App />
         </ThemeProvider>
-    </React.StrictMode>, document.getElementById('root'))
+    </>, document.getElementById('root'))
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
