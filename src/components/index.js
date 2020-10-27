@@ -1,12 +1,12 @@
 //commmon
-export { default as View } from "./common/view"
-export { default as Button } from "./common/button"
-export { default as Image } from "./common/image"
-export { default as Text } from "./common/text"
-export { default as Title } from "./common/title"
-export { default as Input } from "./common/input"
-export { default as Tab } from "./common/tab"
-export { default as CheckBox } from "./common/checkbox"
+export { default as ViewCommon } from "./common/view"
+export { default as ButtonCommon } from "./common/button"
+export { default as ImageCommon } from "./common/image"
+export { default as TextCommon } from "./common/text"
+export { default as TitleCommon } from "./common/title"
+export { default as InputCommon } from "./common/input"
+export { default as TabCommon } from "./common/tab"
+export { default as CheckBoxCommon } from "./common/checkbox"
 
 //modal
 export { default as ModalOtp } from "./modal/modal-otp"

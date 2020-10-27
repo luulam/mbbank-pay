@@ -1,6 +1,6 @@
 import React from "react";
 import Styled from "./select-type-pay.style";
-import { Button, Text, View, Title, Image } from "components";
+import { ButtonCommon, TextCommon, ViewCommon, TitleCommon, ImageCommon } from "components";
 import images from "assets/images";
 
 const FlowAtmStep1 = ({ onNext, setTypePay, typePay }) => {
@@ -28,46 +28,46 @@ const FlowAtmStep1 = ({ onNext, setTypePay, typePay }) => {
 
     return (
         <Styled>
-            <View className="ctn-title">
-                <Title>Thanh toán</Title>
-                <Text>
+            <ViewCommon className="ctn-title">
+                <TitleCommon>Thanh toán</TitleCommon>
+                <TextCommon>
                     {
                         "Chào mừng bạn đến với trang thanh toán điện tử của MB \nVui lòng chọn một trong hai hình thức thanh toán"
                     }
-                </Text>
-            </View>
+                </TextCommon>
+            </ViewCommon>
 
-            <View className="ctn-select-box">
+            <ViewCommon className="ctn-select-box">
                 {listTypePay.map((value, index) => {
                     let isSelect = index === typePay;
                     return (
-                        <View
+                        <ViewCommon
                             key={index}
                             className={`ctn-item ${isSelect ? "ctn-item-select" : ""}`}
                             onClick={() => _onSelectTypePay(index)}
                         >
-                            <Image
+                            <ImageCommon
                                 className={`img-type`}
                                 src={isSelect ? value.img : value.imgDisable}
                             />
-                            <Text>{value.name}</Text>
-                            <Image
+                            <TextCommon>{value.name}</TextCommon>
+                            <ImageCommon
                                 className="img-select"
                                 src={isSelect ? images.icSelectOn : images.icSelectOff}
                             />
-                        </View>
+                        </ViewCommon>
                     );
                 })}
-            </View>
+            </ViewCommon>
 
-            <Button
+            <ButtonCommon
                 className="btn-submit"
                 onClick={() => {
                     _onNextScreen();
                 }}
             >
                 Tiếp tục
-      </Button>
+      </ButtonCommon>
         </Styled>
     );
 };

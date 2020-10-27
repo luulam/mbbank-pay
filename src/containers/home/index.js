@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Tab, ModalOtp, ModalSignIn } from "components";
+import { TabCommon, ModalOtp, ModalSignIn } from "components";
 import HeaderBar from "./component/header-bar";
 import StepBar from "./component/step-bar";
 import SelectTypePay from "./select-type-pay";
@@ -43,7 +43,7 @@ const HomeContainer = () => {
       <HeaderBar />
       <Container maxWidth="sm">
         <StepBar current={curentTab} />
-        <Tab current={curentTab} className={classes.root}>
+        <TabCommon current={curentTab} className={classes.root}>
           <SelectTypePay
             onNext={_onNextStep}
             setTypePay={setTypePay}
@@ -59,7 +59,7 @@ const HomeContainer = () => {
           ) : (
             <AccountStep2 onNext={_onNextStep} goBack={_onGoBack} />
           )}
-        </Tab>
+        </TabCommon>
 
         <ModalOtp ref={modalOtp} onDone={onDoneOtp} />
         <ModalSignIn/>

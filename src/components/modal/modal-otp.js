@@ -7,7 +7,7 @@ import React, {
 import Styled from "./modal-otp.style";
 import Backdrop from "@material-ui/core/Backdrop";
 import OtpInput from "../otp-input";
-import Button from "../common/button";
+import ButtonCommon from "../common/button";
 const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
   const [open, setOpen] = useState(false);
   const [timeCountdown, setTimeCountdown] = useState(0);
@@ -73,9 +73,9 @@ const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
         <span
           className={"txt-time"}
         >{`Mã xác thực sẽ hết trong ( ${timeCountdown}s )`}</span>
-        <Button className="btn-submit" onClick={handleClose}>
+        <ButtonCommon className="btn-submit" onClick={handleClose}>
           Xác thực
-        </Button>
+        </ButtonCommon>
       </div>
     </Styled>
   );

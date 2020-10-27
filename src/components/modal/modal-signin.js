@@ -6,14 +6,14 @@ import React, {
 } from "react";
 import {
   ContainerModal,
-  TitleModal,
+  Title,
   Card,
   CtnInput,
   SubTitle,
   ButtonBack,
   ButtonNext,
   TitleInput,
-  InputModal,
+  Input,
 } from "./modal-signin.style";
 import Backdrop from "@material-ui/core/Backdrop";
 
@@ -40,22 +40,22 @@ const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
       BackdropProps={{ timeout: 500 }}
     >
       <Card>
-        <TitleModal>Đăng nhập</TitleModal>
+        <Title>Đăng nhập</Title>
         <SubTitle>
           Đăng nhập tài khoản MB Internet Banking của bạn để <br />
           tiến hành thanh toán.
         </SubTitle>
         <CtnInput>
           <TitleInput>TÊN ĐĂNG NHẬP</TitleInput>
-          <InputModal></InputModal>
+          <Input></Input>
         </CtnInput>
         <CtnInput>
           <TitleInput>MẬT KHẨU</TitleInput>
-          <InputModal></InputModal>
+          <Input></Input>
         </CtnInput>
         <CtnInput>
           <TitleInput>MÃ XÁC NHẬN</TitleInput>
-          <InputModal></InputModal>
+          <Input></Input>
         </CtnInput>
         <ButtonNext>TIẾP TỤC</ButtonNext>
         <ButtonBack>HUỶ</ButtonBack>

@@ -1,40 +1,40 @@
 import React from "react";
 import Styled from "./step-bar.style";
-import { View, Text, Image } from "components";
+import { ViewCommon, TextCommon, ImageCommon } from "components";
 import images from "assets/images";
+
 const StepBar = ({ current = 0 }) => {
-  console.log("current", current);
   const listStep = [
     { name: "Loại thanh toán" },
     { name: "Nhập thông tin" },
     { name: "Xác thực thông tin" },
   ];
-  function _icState(index: number) {
+  function _icState(index) {
     if (index < current) return images.icStepSuccess;
     else if (index === current) return images.icStepAction;
     else return images.icStepPendding;
   }
   return (
     <Styled>
-      <View className="ctn-step">
+      <ViewCommon className="ctn-step">
         {listStep.map((value, index) => (
           <>
-            <Image className="" src={_icState(index)} />
+            <ImageCommon className="" src={_icState(index)} />
             {index < listStep.length - 1 ? (
-              <View className="ctn-step-line" />
+              <ViewCommon className="ctn-step-line" />
             ) : undefined}
           </>
         ))}
-      </View>
-      <View className="ctn-name">
+      </ViewCommon>
+      <ViewCommon className="ctn-name">
         {listStep.map((value, index) => {
           return (
-            <View className="ctn-title" key={index}>
-              <Text>{value.name}</Text>
-            </View>
+            <ViewCommon className="ctn-title" key={index}>
+              <TextCommon>{value.name}</TextCommon>
+            </ViewCommon>
           );
         })}
-      </View>
+      </ViewCommon>
     </Styled>
   );
 };
