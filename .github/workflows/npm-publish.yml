@@ -1,30 +1,14 @@
 name: Firebase Deploy
-on:
+'on':
   push:
     branches:
       - master
 jobs:
-  build:
-    name: Build
+  build_and_deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout Repo
-        uses: actions/checkout@v2.3.2
-      - name: Install Dependencies
-        run: npm install
-      - name: Build
-        run: npm run build
-      - name: Archive Production Artifact
-        uses: actions/upload-artifact@v2
-        with:
-          name: build
-          path: build
-  deploy:
-    name: Deploy
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Deploy to Firebase
+      - uses: actions/checkout@v2
+      - run: npm install && npm run build
       - uses: FirebaseExtended/action-hosting-deploy@v0
         with:
           repoToken: '${{ secrets.GITHUB_TOKEN }}'
@@ -33,3 +17,4 @@ jobs:
           projectId: deep-bivouac-236316
         env:
           FIREBASE_CLI_PREVIEWS: hostingchannels
+
