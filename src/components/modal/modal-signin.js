@@ -18,7 +18,7 @@ import {
 import Backdrop from "@material-ui/core/Backdrop";
 
 const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
-  const [open, setOpen] = useState(true);
+  const [open, setOpen] = useState(false);
 
   const handleClose = () => {};
   useImperativeHandle(ref, () => ({
@@ -58,7 +58,7 @@ const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
           <Input></Input>
         </CtnInput>
         <ButtonNext>TIẾP TỤC</ButtonNext>
-        <ButtonBack>HUỶ</ButtonBack>
+        <ButtonBack onClick={() => setOpen(false)}>HUỶ</ButtonBack>
       </Card>
     </ContainerModal>
   );

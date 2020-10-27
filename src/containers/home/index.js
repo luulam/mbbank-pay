@@ -21,10 +21,15 @@ const useStyles = makeStyles((theme) => ({
 const HomeContainer = () => {
   const classes = useStyles();
   const modalOtp = useRef();
+  const modalSignin = useRef();
   const [curentTab, setCurentTab] = useState(0);
   const [typePay, setTypePay] = useState(0);
 
   const _onNextStep = (curent) => {
+    if (curent === 0 && typePay === 1) {
+      modalSignin.current.show();
+      return;
+    }
     if (curent === 2) {
       console.log("modalOtp", modalOtp);
       modalOtp.current.show();
@@ -62,7 +67,7 @@ const HomeContainer = () => {
         </TabCommon>
 
         <ModalOtp ref={modalOtp} onDone={onDoneOtp} />
-        <ModalSignIn/>
+        <ModalSignIn ref={modalSignin} />
       </Container>
     </>
   );

@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { colors } from "theme";
+import { spacing } from "theme/index";
 
 const Styles = styled.div`
   display:flex;
@@ -9,10 +10,10 @@ const Styles = styled.div`
     border-radius: 8px;
     background: #f2f2f2;
     border-width: 0px;
-    height: 52px;
+    height: 48px;
     align-items:center;
-    padding-left: 12px;
-    padding-right: 12px;
+    padding-left: ${spacing[2]};
+    padding-right: ${spacing[2]};
   }
 
   .err {
