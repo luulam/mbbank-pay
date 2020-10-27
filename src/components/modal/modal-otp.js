@@ -10,12 +10,8 @@ import OtpInput from "../otp-input";
 import Button from "../common/button";
 const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
   const [open, setOpen] = useState(false);
-  const [valueOtp, setValueOtp] = useState("");
   const [timeCountdown, setTimeCountdown] = useState(0);
   let timer = null;
-  const handleOpen = () => {
-    setOpen(true);
-  };
 
   const handleClose = () => {
     setOpen(false);
@@ -29,6 +25,7 @@ const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
     clearTimeout(timer);
     setTimeCountdown(30);
   };
+
   const onReSendOtp = () => {
     onStartCountDown();
   };

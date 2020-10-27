@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { mediaScreen, spacing, fonts } from "theme";
+import { spacing, fonts } from "theme";
 
 const Styles = styled.div`
   padding: ${spacing[5]};

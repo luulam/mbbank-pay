@@ -1,5 +1,4 @@
 import styled from "styled-components";
-import { colors, spacing } from "theme";
 
 const Styles = styled.div`
   display:flex;

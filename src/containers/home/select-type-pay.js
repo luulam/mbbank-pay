@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import Styled from "./select-type-pay.style";
 import { Button, Text, View, Title, Image } from "components";
 import images from "assets/images";

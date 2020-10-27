@@ -6,7 +6,6 @@ import React, {
   useImperativeHandle,
 } from "react";
 import { Container, CtnItemInput, ItemInput, Line } from "./otp-input.element";
-import _ from "lodash";
 import * as R from "ramda";
 // RowInput
 const RowInput = ({
@@ -23,7 +22,7 @@ const RowInput = ({
   const input = useRef();
 
   const onChangeText = (e) => {
-    if (e.target.value.match(/^\d+$/g) || e.target.value == "") {
+    if (e.target.value.match(/^\d+$/g) || e.target.value === "") {
       onChange(e.target.value);
       setValue(e.target.value);
     }
@@ -34,7 +33,7 @@ const RowInput = ({
     if (value.match(/^\d+$/g)) {
       onNext && onNext();
     }
-    if (value == "") {
+    if (value === "") {
       onPrev && onPrev();
     }
   }, [value]);

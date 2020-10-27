@@ -4,14 +4,9 @@ import { Button, Text, View, Title, Image, CheckBox } from "components";
 import images from "assets/images";
 
 const FlowAtmStep1 = ({ onNext, goBack }) => {
-  const [msgErrorNumberCard, setMsgErrorNumberCard] = useState("");
 
   const _onNextScreen = () => {
     onNext && onNext(2);
-  };
-
-  const onChangeNumberCard = (value) => {
-    setMsgErrorNumberCard("")
   };
 
   const listForm = [

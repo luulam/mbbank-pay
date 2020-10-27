@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { View, Tab, ModalOtp } from "components";
+import { Tab, ModalOtp } from "components";
 import HeaderBar from "./component/header-bar";
 import StepBar from "./component/step-bar";
 import SelectTypePay from "./select-type-pay";

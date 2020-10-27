@@ -2,7 +2,6 @@ import React from 'react'
 import { render } from 'react-dom'
 import App from './App'
 import reportWebVitals from './reportWebVitals'
-import styled from "styled-components"
 import GlobalStyle from "global.styles"
 import { Helmet } from "react-helmet"
 import { ThemeProvider } from '@material-ui/core/styles';
