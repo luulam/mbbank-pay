@@ -1,11 +1,18 @@
-import React, { useState, forwardRef, useImperativeHandle } from "react";
+import React, {
+  useState,
+  forwardRef,
+  useImperativeHandle,
+  useEffect,
+} from "react";
 import Styled from "./modal-otp.style";
 import Backdrop from "@material-ui/core/Backdrop";
 import OtpInput from "../otp-input";
 import Button from "../common/button";
-const ViewCommon = ({ children, ...restProps }, ref) => {
-  const [open, setOpen] = useState(true);
+const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
+  const [open, setOpen] = useState(false);
   const [valueOtp, setValueOtp] = useState("");
+  const [timeCountdown, setTimeCountdown] = useState(0);
+  let timer = null;
   const handleOpen = () => {
     setOpen(true);
   };
@@ -13,12 +20,40 @@ const ViewCommon = ({ children, ...restProps }, ref) => {
   const handleClose = () => {
     setOpen(false);
   };
+  const onDoneOtp = (value) => {
+    onDone(value);
+    setOpen(false);
+  };
+
+  const onStartCountDown = () => {
+    clearTimeout(timer);
+    setTimeCountdown(30);
+  };
+  const onReSendOtp = () => {
+    onStartCountDown();
+  };
 
   useImperativeHandle(ref, () => ({
     show: () => {
       setOpen(true);
     },
   }));
+
+  useEffect(() => {
+    if (open) onStartCountDown();
+  }, [open]);
+
+  useEffect(() => {
+    if (timeCountdown <= 0) return;
+    timer = setTimeout(() => {
+      let newTimeCountdown = timeCountdown - 1;
+      if (newTimeCountdown < 0) return;
+      setTimeCountdown(newTimeCountdown);
+    }, 1000);
+  }, [timeCountdown]);
+
+  useEffect(() => {}, []);
+
   return (
     <Styled
       aria-labelledby="transition-modal-title"
@@ -34,16 +69,13 @@ const ViewCommon = ({ children, ...restProps }, ref) => {
         <span>
           {"Chúng tôi đã gửi mã xác thực đến số điện thoại của bạn. "}
           <br />
-          {"Nếu chưa nhận được, vui lòng chọn Gửi lại mã"}
+          {"Nếu chưa nhận được, vui lòng chọn "}
+          <a onClick={onReSendOtp}>Gửi lại mã</a>
         </span>
-        <OtpInput
-          shouldAutoFocus={true}
-          value={valueOtp}
-          onChange={(value) => setValueOtp(value)}
-          numInputs={6}
-          separator={<span>-</span>}
-        />
-        <span className={"txt-time"}>Mã xác thực sẽ hết trong ( 30s )</span>
+        <OtpInput onDone={onDoneOtp} className={"otp-input"} />
+        <span
+          className={"txt-time"}
+        >{`Mã xác thực sẽ hết trong ( ${timeCountdown}s )`}</span>
         <Button className="btn-submit" onClick={handleClose}>
           Xác thực
         </Button>

@@ -13,21 +13,21 @@ export const CtnItemInput = styled.div`
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  background: red;
 `;
 
 export const Line = styled.span`
   flex: 1;
   align-self: center;
-  background: red;
+  margin-left: 10px;
 `;
 
 export const ItemInput = styled.input`
-  border: 1px solid gray;
+  border: 1px solid #2357ea;
   align-items: center;
   justify-content: center;
-  width: 40px;
-  height: 40px;
+  width: 34px;
+  height: 42px;
   font-size: 26px;
   text-align: center;
+  border-radius: 4px;
 `;
