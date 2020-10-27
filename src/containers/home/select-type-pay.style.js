@@ -47,7 +47,7 @@ const Styles = styled.div`
       text-align: center;
     }
     .img-type {
-      height: 71px;
+      height: 48px;
       margin-top: ${spacing[4]};
     }
 

@@ -4,10 +4,10 @@ import { colors, spacing } from "theme";
 const Styles = styled.button`
   display: flex;
   background: ${colors.Primary};
-  height: 48px;
+  height: 42px;
   align-items: center;
   justify-content: center;
-  border-radius: 8px;
+  border-radius: 6px;
   padding-left: ${spacing[7]};
   padding-right: ${spacing[7]};
   font-size: 14px;

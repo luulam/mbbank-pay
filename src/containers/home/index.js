@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { Tab, ModalOtp } from "components";
+import { Tab, ModalOtp, ModalSignIn } from "components";
 import HeaderBar from "./component/header-bar";
 import StepBar from "./component/step-bar";
 import SelectTypePay from "./select-type-pay";
@@ -62,6 +62,7 @@ const HomeContainer = () => {
         </Tab>
 
         <ModalOtp ref={modalOtp} onDone={onDoneOtp} />
+        <ModalSignIn/>
       </Container>
     </>
   );

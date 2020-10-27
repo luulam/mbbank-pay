@@ -10,7 +10,7 @@ export { default as CheckBox } from "./common/checkbox"
 
 //modal
 export { default as ModalOtp } from "./modal/modal-otp"
-
+export { default as ModalSignIn } from "./modal/modal-signin"
 
 //clone
 export { default as OtpInput } from "./otp-input"
