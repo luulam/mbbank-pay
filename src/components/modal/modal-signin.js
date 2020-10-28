@@ -4,6 +4,7 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from "react";
+import { ChangeCode } from "components";
 import {
   ContainerModal,
   Title,
@@ -14,6 +15,8 @@ import {
   ButtonNext,
   TitleInput,
   Input,
+  NotiError,
+  CtnInputChangeCode,
 } from "./modal-signin.style";
 import Backdrop from "@material-ui/core/Backdrop";
 
@@ -21,28 +24,26 @@ const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
   const [open, setOpen] = useState(false);
 
   const handleClose = () => {};
+
   useImperativeHandle(ref, () => ({
     show: () => {
       setOpen(true);
     },
   }));
 
+  const onNext = () => {
+    onDone();
+    setOpen(false);
+  };
+
   useEffect(() => {}, [open]);
 
   return (
-    <ContainerModal
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{ timeout: 500 }}
-    >
+    <ContainerModal open={open} onClose={handleClose}>
       <Card>
         <Title>Đăng nhập</Title>
         <SubTitle>
-          Đăng nhập tài khoản MB Internet Banking của bạn để <br />
+          Đăng nhập tài khoản <a>MB Internet Banking</a> của bạn để <br />
           tiến hành thanh toán.
         </SubTitle>
         <CtnInput>
@@ -55,9 +56,12 @@ const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
         </CtnInput>
         <CtnInput>
           <TitleInput>MÃ XÁC NHẬN</TitleInput>
-          <Input></Input>
+          <ChangeCode />
         </CtnInput>
-        <ButtonNext>TIẾP TỤC</ButtonNext>
+
+        <NotiError>Thông tin đăng nhập/ mât khẩu không chính xác</NotiError>
+
+        <ButtonNext onClick={onNext}>TIẾP TỤC</ButtonNext>
         <ButtonBack onClick={() => setOpen(false)}>HUỶ</ButtonBack>
       </Card>
     </ContainerModal>

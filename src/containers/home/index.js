@@ -1,5 +1,5 @@
 import React, { useState, useRef } from "react";
-import { TabCommon, ModalOtp, ModalSignIn } from "components";
+import { TabCommon, ModalOtp, ModalSignIn, ModalDigitalOtp} from "components";
 import HeaderBar from "./component/header-bar";
 import StepBar from "./component/step-bar";
 import SelectTypePay from "./select-type-pay";
@@ -22,19 +22,41 @@ const HomeContainer = () => {
   const classes = useStyles();
   const modalOtp = useRef();
   const modalSignin = useRef();
+  const modalDigitalOtp = useRef();
+
   const [curentTab, setCurentTab] = useState(0);
   const [typePay, setTypePay] = useState(0);
+  const [typeVerify, setTypeVerify] = useState(1);
 
   const _onNextStep = (curent) => {
-    if (curent === 0 && typePay === 1) {
-      modalSignin.current.show();
-      return;
+    if (typePay === 1) {
+      switch (curent) {
+        case 0:
+          modalSignin.current.show();
+          break;
+        case 2:
+          if (typeVerify === 0) modalOtp.current.show();
+          else modalDigitalOtp.current.show();
+          break;
+        default:
+          setCurentTab(curent + 1);
+          break;
+      }
+    } else {
+      if (curent === 2) {
+        modalOtp.current.show();
+      } else setCurentTab(curent + 1);
     }
-    if (curent === 2) {
-      console.log("modalOtp", modalOtp);
-      modalOtp.current.show();
-    } else setCurentTab(curent + 1);
   };
+
+  const _onLoginSuccess = () => {
+    setCurentTab(curentTab + 1);
+  };
+
+  const _onChangeVerify = (index) => {
+    setTypeVerify(index);
+  };
+
   const _onGoBack = () => {
     if (curentTab < 1) return;
     setCurentTab(curentTab - 1);
@@ -59,15 +81,21 @@ const HomeContainer = () => {
           ) : (
             <AccountStep1 onNext={_onNextStep} goBack={_onGoBack} />
           )}
+
           {typePay === 0 ? (
             <AtmStep2 onNext={_onNextStep} goBack={_onGoBack} />
           ) : (
-            <AccountStep2 onNext={_onNextStep} goBack={_onGoBack} />
+            <AccountStep2
+              onNext={_onNextStep}
+              goBack={_onGoBack}
+              onChangeVerify={_onChangeVerify}
+            />
           )}
         </TabCommon>
 
         <ModalOtp ref={modalOtp} onDone={onDoneOtp} />
-        <ModalSignIn ref={modalSignin} />
+        <ModalSignIn ref={modalSignin} onDone={_onLoginSuccess} />
+        <ModalDigitalOtp ref={modalDigitalOtp} onDone={_onLoginSuccess} />
       </Container>
     </>
   );

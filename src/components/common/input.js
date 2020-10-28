@@ -8,11 +8,13 @@ const InputCommon = ({
   onChangeValue,
   style,
   disabled,
-  ...restProps }) => {
-
+  value,
+  ...restProps
+}) => {
   return (
     <Styled style={style} {...restProps}>
       <input
+        value={value}
         disabled={disabled}
         className={`${msgError ? "err" : ""}`}
         placeholder={placeholder}

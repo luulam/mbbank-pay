@@ -3,7 +3,7 @@ import Styled from "./title.style";
 
 const TitleCommon = ({ children, ...restProps }) => {
   return (
-    <Styled level={2} {...restProps}>
+    <Styled {...restProps}>
       {children}
     </Styled>
   );
