@@ -34,12 +34,15 @@ export const CtnInput = styled(View)`
   margin-top: ${spacing[3]};
 `;
 
-export const Input = styled(InputCommon)``;
+export const Input = styled(InputCommon)`
+  margin-top: ${spacing[2]};
+  margin-bottom: ${spacing[6]};
+`;
 
 export const TitleInput = styled(TitleCommon)`
   font-size: 1.1em;
   color: #333333;
-  margin-bottom: ${spacing[0]}
+  margin-bottom: ${spacing[0]};
 `;
 
 export const NotiError = styled(TextCommon)`
@@ -50,6 +53,18 @@ export const NotiError = styled(TextCommon)`
   margin-bottom: ${spacing[1]};
 `;
 
+export const ImgQrCode = styled.img`
+  width: 240px;
+  height: 240px;
+  align-self: center;
+`;
+
+export const TitleQr = styled.span`
+  text-align: center;
+`;
+export const TextCountdown = styled.span`
+  text-align: center;
+`;
 export const ButtonNext = styled(ButtonCommon)`
   width: 100%;
 `;

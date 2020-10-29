@@ -1,6 +1,7 @@
 import styled from "styled-components";
 
 const Styles = styled.h1`
+  font-family: AvertaStdCY-Bold;
   margin-block-start: 0px;
   margin-block-end: 0px;
   margin-inline-start: 0px;

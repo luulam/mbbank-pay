@@ -1,3 +1,6 @@
+import cpCheck from './images/common/check.png'
+import cpUnCheck from './images/common/un_check.png'
+import cpQrCodeDemo from './images/common/qr_code_demo.png'
 import logo from './images/home/logo.png'
 import icBack from './images/home/ic_back.png'
 import icStepAction from './images/home/ic_step_action.png'
@@ -11,6 +14,10 @@ import icSelectOff from './images/home/ic_select_off.png'
 import icSelectOn from './images/home/ic_select_on.png'
 
 const images = {
+  cpCheck,
+  cpUnCheck,
+  cpQrCodeDemo,
+
   //Home
   logo,
   icBack,

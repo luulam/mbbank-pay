@@ -1,16 +1,18 @@
 import React, { useState } from "react";
-import Styled from "./checkbox.style";
-
+import { Container, Icon } from "./checkbox.style";
+import images from "assets/images";
 const CheckBoxCommon = ({ children, title, select = false, ...restProps }) => {
-    const [isSelect, setIsSelect] = useState(select)
+  const [isSelect, setIsSelect] = useState(select);
 
-    const _onClick = () => {
-        setIsSelect(!isSelect)
-    }
-    return <Styled {...restProps} onClick={_onClick}>
-        <div className={isSelect ? "dot img-select" : "dot"} />
-        <span>{title}</span>
-    </Styled>;
+  const _onClick = () => {
+    setIsSelect(!isSelect);
+  };
+  return (
+    <Container {...restProps} onClick={_onClick}>
+      <Icon src={isSelect ? images.cpCheck : images.cpUnCheck} />
+      <span>{title}</span>
+    </Container>
+  );
 };
 
 export default CheckBoxCommon;

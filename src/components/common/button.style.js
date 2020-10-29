@@ -16,6 +16,7 @@ const Styles = styled.button`
   font-weight: bold;
   outline: none;
   border: none;
+  font-family: AvertaStdCY-Bold;
 `;
 
 export default Styles;

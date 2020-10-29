@@ -16,10 +16,12 @@ import {
   TitleInput,
   Input,
   NotiError,
-  CtnInputChangeCode,
-} from "./modal-signin.style";
+  ImgQrCode,
+  TitleQr,
+  TextCountdown,
+} from "./modal-digital-otp.style";
 import Backdrop from "@material-ui/core/Backdrop";
-
+import images from "assets/images";
 const ModalDigitalOtp = ({ children, onDone, ...restProps }, ref) => {
   const [open, setOpen] = useState(false);
 
@@ -43,7 +45,8 @@ const ModalDigitalOtp = ({ children, onDone, ...restProps }, ref) => {
       <Card>
         <Title>Xác thực Digital OTP</Title>
         <SubTitle>
-          1. Sử dụng App ngân hàng MBBank trên thiết bị đã đăng ký dịch vụ<br/>
+          1. Sử dụng App ngân hàng MBBank trên thiết bị đã đăng ký dịch vụ
+          <br />
           Digital OTP
           <br />
           2. Chọn xác thực giao dịch tại màn hình Login
@@ -53,7 +56,10 @@ const ModalDigitalOtp = ({ children, onDone, ...restProps }, ref) => {
           4. Nhập mã OTP để xác thực giao dịch
         </SubTitle>
 
-        <Input></Input>
+        <ImgQrCode src={images.cpQrCodeDemo} />
+        <TitleQr>Mã QR</TitleQr>
+        <TextCountdown>Mã xác thực sẽ hết sau (120s )</TextCountdown>
+        <Input placeholder="Nhập mã QR"></Input>
         <ButtonNext onClick={onNext}>XÁC THỰC</ButtonNext>
       </Card>
     </ContainerModal>

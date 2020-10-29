@@ -1,5 +1,7 @@
 import styled from "styled-components";
 
-const Styles = styled.span``;
+const Styles = styled.span`
+  font-family: AvertaStdCY-Regular;
+`;
 
 export default Styles;
