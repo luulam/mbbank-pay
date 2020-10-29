@@ -7,6 +7,7 @@ const Styles = styled.h1`
   margin-inline-start: 0px;
   margin-inline-end: 0px;
   font-size: 1.6em;
+  color: black;
 `;
 
 export default Styles;

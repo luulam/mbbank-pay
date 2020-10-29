@@ -14,7 +14,7 @@ export const Container = styled(ViewCommon)`
   background: white;
   border-radius: 6px;
   padding: ${spacing[3]};
-  padding-bottom: ${spacing[5]}
+  padding-bottom: ${spacing[5]};
 `;
 export const Card = styled(ViewCommon)`
   background: white;

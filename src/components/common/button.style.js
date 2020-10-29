@@ -4,19 +4,18 @@ import { colors, spacing } from "theme";
 const Styles = styled.button`
   display: flex;
   background: ${colors.Primary};
-  height: 42px;
+  height: 46px;
   align-items: center;
   justify-content: center;
-  border-radius: 6px;
+  border-radius: 8px;
   padding-left: ${spacing[7]};
   padding-right: ${spacing[7]};
-  font-size: 14px;
+  font-size: 16px;
   text-transform: uppercase;
   color: ${colors.White};
-  font-weight: bold;
   outline: none;
   border: none;
-  font-family: AvertaStdCY-Bold;
+  font-family: "AvertaStdCY-Bold";
 `;
 
 export default Styles;

@@ -1,5 +1,5 @@
 import React from "react";
-import Styled from "./step-bar.style";
+import { Container, NameStep } from "./step-bar.style";
 import { ViewCommon, TextCommon, ImageCommon } from "components";
 import images from "assets/images";
 
@@ -9,13 +9,15 @@ const StepBar = ({ current = 0 }) => {
     { name: "Nhập thông tin" },
     { name: "Xác thực thông tin" },
   ];
+
   function _icState(index) {
     if (index < current) return images.icStepSuccess;
     else if (index === current) return images.icStepAction;
     else return images.icStepPendding;
   }
+
   return (
-    <Styled>
+    <Container>
       <ViewCommon className="ctn-step">
         {listStep.map((value, index) => (
           <>
@@ -29,13 +31,17 @@ const StepBar = ({ current = 0 }) => {
       <ViewCommon className="ctn-name">
         {listStep.map((value, index) => {
           return (
-            <ViewCommon className="ctn-title" key={index}>
-              <TextCommon>{value.name}</TextCommon>
-            </ViewCommon>
+            <NameStep
+              className="ctn-title"
+              key={index}
+              enable={index === current}
+            >
+              {value.name}
+            </NameStep>
           );
         })}
       </ViewCommon>
-    </Styled>
+    </Container>
   );
 };
 

@@ -1,2 +1,4 @@
-const metric = {}
-export default metric
+const metric = {
+  radius: "8px",
+};
+export default metric;
