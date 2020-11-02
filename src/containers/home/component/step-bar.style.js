@@ -11,8 +11,8 @@ export const Container = styled(ViewCommon)`
     display: flex;
     flex-direction: row;
     align-items: center;
-    margin-left: ${spacing[4]};
-    margin-right: ${spacing[4]};
+    margin-left: ${spacing[6]};
+    margin-right: ${spacing[6]};
 
     img {
       width: 43px;
@@ -30,6 +30,7 @@ export const Container = styled(ViewCommon)`
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    text-align: center;
   }
   .ctn-title {
     /* flex: 1; */
