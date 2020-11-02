@@ -1,24 +1,26 @@
-import { createGlobalStyle } from "styled-components";
+import { createGlobalStyle, css } from "styled-components";
+import AvertaStdCYBold from "./assets/fonts/AvertaStdCY-Bold.otf";
+import AvertaStdCYRegular from "./assets/fonts/AvertaStdCY-Regular.otf";
+import AvertaStdCYSemiBold from "./assets/fonts/AvertaStdCY-Semibold.otf";
 
+export const fontFaces = css`
+  @font-face {
+    font-family: "AvertaStdCY-Bold";
+    src: url(${AvertaStdCYBold}) format("truetype");
+  }
+
+  @font-face {
+    font-family: "AvertaStdCY-Regular";
+    src: url(${AvertaStdCYRegular}) format("truetype");
+  }
+  @font-face {
+    font-family: "AvertaStdCY-Semibold";
+    src: url(${AvertaStdCYSemiBold}) format("truetype");
+  }
+`;
 const GlobalStyle = createGlobalStyle`
-  @font-face {
-    font-family: 'AvertaStdCY-Bold';
-    src: local('AvertaStdCY-Bold') url('./assets/fonts/AvertaStdCY-Bold.otf') format('AvertaStdCY-Bold');
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'AvertaStdCY-Regular';
-    src: local('AvertaStdCY-Regular') url('./assets/fonts/AvertaStdCY-Regular.otf') format('AvertaStdCY-Regular');
-    font-weight: normal;
-    font-style: normal;
-  }
-  @font-face {
-    font-family: 'AvertaStdCY-Semibold';
-    src: local('AvertaStdCY-Semibold') url('./assets/fonts/AvertaStdCY-Semibold.otf') format('AvertaStdCY-Semibold');
-    font-weight: normal;
-    font-style: normal;
-  }
+  ${fontFaces}
+
   html,
   body {
     height: 100%;
@@ -29,7 +31,12 @@ const GlobalStyle = createGlobalStyle`
   }
 
   body {
-    font-family: 'AvertaStdCY-Bold', 'AvertaStdCY-Regular';
+    font-family: 'AvertaStdCY-Bold', 'AvertaStdCY-Regular','AvertaStdCY-Semibold';
+  } 
+
+
+  body.fontLoaded {
+    font-family: 'AvertaStdCY-Bold', 'AvertaStdCY-Regular','AvertaStdCY-Semibold';
   }
 
   #app {

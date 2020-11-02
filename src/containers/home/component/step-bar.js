@@ -10,18 +10,18 @@ const StepBar = ({ current = 0 }) => {
     { name: "Xác thực thông tin" },
   ];
 
-  function _icState(index) {
+  const icState = (index) => {
     if (index < current) return images.icStepSuccess;
     else if (index === current) return images.icStepAction;
     else return images.icStepPendding;
-  }
+  };
 
   return (
     <Container>
       <ViewCommon className="ctn-step">
         {listStep.map((value, index) => (
           <>
-            <ImageCommon className="" src={_icState(index)} />
+            <ImageCommon className="" src={icState(index)} />
             {index < listStep.length - 1 ? (
               <ViewCommon className="ctn-step-line" />
             ) : undefined}

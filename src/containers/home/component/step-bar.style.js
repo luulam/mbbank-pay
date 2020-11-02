@@ -15,8 +15,8 @@ export const Container = styled(ViewCommon)`
     margin-right: ${spacing[6]};
 
     img {
-      width: 43px;
-      height: 43px;
+      width: 38px;
+      height: 38px;
     }
   }
 
