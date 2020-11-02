@@ -8,8 +8,9 @@ const Styles = styled.button`
   align-items: center;
   justify-content: center;
   border-radius: 8px;
-  padding-left: ${spacing[7]};
-  padding-right: ${spacing[7]};
+  width: 200px;
+  /* padding-left: ${spacing[7]};
+  padding-right: ${spacing[7]}; */
   font-size: 16px;
   text-transform: uppercase;
   color: ${colors.White};

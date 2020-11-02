@@ -29,11 +29,6 @@ export const InputShow = styled(InputCommon)`
   }
 `;
 
-export const TitleInput = styled(TitleCommon)`
-  font-size: 1.1em;
-  color: #333333;
-`;
-
 export const CtnChangeCode = styled(ViewCommon)`
   justify-content: flex-end;
   align-items: center;
@@ -45,7 +40,6 @@ export const TitleChangeCode = styled.span``;
 
 export const ImgChangeCode = styled.img`
   margin-left: ${spacing[1]};
-  width: 10px;
-  height: 10px;
-  background: gray;
+  width: 12px;
+  height: 12px;
 `;

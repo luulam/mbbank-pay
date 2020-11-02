@@ -1,6 +1,12 @@
 import React from "react";
-import { Container, NameStep } from "./step-bar.style";
-import { ViewCommon, TextCommon, ImageCommon } from "components";
+import {
+  Container,
+  NameStep,
+  CtnName,
+  CtnImage,
+  LineDot,
+  Image,
+} from "./step-bar.style";
 import images from "assets/images";
 
 const StepBar = ({ current = 0 }) => {
@@ -16,22 +22,31 @@ const StepBar = ({ current = 0 }) => {
     else return images.icStepPendding;
   };
 
+  const getStyle = (index, length) => {
+    if (index === 0) return { textAlign: "left" };
+    if (index === length - 1) return { textAlign: "right" };
+    return { textAlign: "center" };
+  };
+
   return (
     <Container>
-      <ViewCommon className="ctn-step">
-        {listStep.map((value, index) => (
-          <>
-            <ImageCommon className="" src={icState(index)} />
-            {index < listStep.length - 1 ? (
-              <ViewCommon className="ctn-step-line" />
-            ) : undefined}
-          </>
-        ))}
-      </ViewCommon>
-      <ViewCommon className="ctn-name">
+      <CtnImage>
+        {Array.from(new Array(listStep.length * 2)).map((value, index) => {
+          let indexReal = Math.floor(index / 2);
+          return index % 2 === 0 ? (
+            index !== 0 ? (
+              <LineDot key={index} enable={current > indexReal - 1} />
+            ) : undefined
+          ) : (
+            <Image key={index} className="" src={icState(indexReal)} />
+          );
+        })}
+      </CtnImage>
+      <CtnName>
         {listStep.map((value, index) => {
           return (
             <NameStep
+              style={getStyle(index, listStep.length)}
               className="ctn-title"
               key={index}
               enable={index === current}
@@ -40,7 +55,7 @@ const StepBar = ({ current = 0 }) => {
             </NameStep>
           );
         })}
-      </ViewCommon>
+      </CtnName>
     </Container>
   );
 };

@@ -18,6 +18,7 @@ export const fontFaces = css`
     src: url(${AvertaStdCYSemiBold}) format("truetype");
   }
 `;
+
 const GlobalStyle = createGlobalStyle`
   ${fontFaces}
 
@@ -28,15 +29,17 @@ const GlobalStyle = createGlobalStyle`
     line-height: 1.5;
     background: #f5f5f5;
     margin: 0px;
+    font-size: 16px;
+    color: #4f4f4f;
   }
 
   body {
-    font-family: 'AvertaStdCY-Bold', 'AvertaStdCY-Regular','AvertaStdCY-Semibold';
+    font-family: 'AvertaStdCY-Regular';
   } 
 
 
   body.fontLoaded {
-    font-family: 'AvertaStdCY-Bold', 'AvertaStdCY-Regular','AvertaStdCY-Semibold';
+    font-family: 'AvertaStdCY-Regular';
   }
 
   #app {

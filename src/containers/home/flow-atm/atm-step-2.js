@@ -1,5 +1,11 @@
 import React, { useState } from "react";
-import Styled from "./atm-step-2.style";
+import {
+  Constant,
+  CtnRowForm,
+  Title,
+  SubTitle,
+  CtnForm,
+} from "./atm-step-2.style";
 import {
   ButtonCommon,
   TextCommon,
@@ -9,9 +15,10 @@ import {
   CheckBoxCommon,
 } from "components";
 import images from "assets/images";
+import NavigationBottom from "../component/navigation-bottom";
 
 const FlowAtmStep1 = ({ onNext, goBack }) => {
-  const _onNextScreen = () => {
+  const onNextScreen = () => {
     onNext && onNext(2);
   };
 
@@ -49,25 +56,24 @@ const FlowAtmStep1 = ({ onNext, goBack }) => {
     },
   ];
   return (
-    <Styled>
-      <ViewCommon className="ctn-title">
-        <TitleCommon level={4}>Xác nhận thanh toán</TitleCommon>
-        <TextCommon>
-          {"Vui lòng kiểm tra lại thông tin thanh toán của bạn:"}
-        </TextCommon>
-      </ViewCommon>
-      <ViewCommon className={"ctn-form"}>
+    <Constant>
+      <Title level={4}>Xác nhận thanh toán</Title>
+      <SubTitle>
+        {"Vui lòng kiểm tra lại thông tin thanh toán của bạn:"}
+      </SubTitle>
+
+      <CtnForm className={"ctn-form"}>
         {listForm.map(({ title, value, classRight }, index) => {
           return (
-            <ViewCommon className="ctn-row" key={index}>
+            <CtnRowForm className="ctn-row" key={index}>
               <TextCommon className="text-left">{title}</TextCommon>
               <TextCommon className={`text-right ${classRight}`}>
                 {value}
               </TextCommon>
-            </ViewCommon>
+            </CtnRowForm>
           );
         })}
-      </ViewCommon>
+      </CtnForm>
 
       <CheckBoxCommon
         title={
@@ -75,22 +81,8 @@ const FlowAtmStep1 = ({ onNext, goBack }) => {
         }
       />
 
-      <ViewCommon className={"ctn-navigate"}>
-        <ImageCommon src={images.icBack} onClick={goBack} />
-        <TextCommon className="back" onClick={goBack}>
-          Quay về
-        </TextCommon>
-
-        <ButtonCommon
-          className="btn-submit"
-          onClick={() => {
-            _onNextScreen();
-          }}
-        >
-          Thanh toán
-        </ButtonCommon>
-      </ViewCommon>
-    </Styled>
+      <NavigationBottom onBack={goBack} onNext={onNextScreen} />
+    </Constant>
   );
 };
 

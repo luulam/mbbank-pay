@@ -14,6 +14,7 @@ const Styles = styled.div`
     align-items:center;
     padding-left: ${spacing[2]};
     padding-right: ${spacing[2]};
+    font-size: 16px;
   }
 
   .err {

@@ -9,12 +9,12 @@ import {
   CtnCode,
   Input,
   InputShow,
-  TitleInput,
   CtnChangeCode,
   TitleChangeCode,
   ImgChangeCode,
   ContainerChangeCode,
 } from "./change-code.element";
+import images from "assets/images";
 
 const ChangeCode = ({ ...restProps }, ref) => {
   const [code, setCode] = useState();
@@ -34,16 +34,15 @@ const ChangeCode = ({ ...restProps }, ref) => {
   }, []);
   return (
     <Container>
-      <Input></Input>
+      <Input placeholder="Nhập tên không đấu"></Input>
 
       <ContainerChangeCode>
         <CtnCode>
-          <TitleInput></TitleInput>
           <InputShow disabled value={code} />
         </CtnCode>
         <CtnChangeCode onClick={() => setCode(randomCode(6))}>
           <TitleChangeCode>Đổi mã</TitleChangeCode>
-          <ImgChangeCode />
+          <ImgChangeCode src={images.icRoll} />
         </CtnChangeCode>
       </ContainerChangeCode>
     </Container>

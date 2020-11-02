@@ -12,11 +12,14 @@ import profile from './images/home/profile.png'
 import profileDisable from './images/home/profile_disable.png'
 import icSelectOff from './images/home/ic_select_off.png'
 import icSelectOn from './images/home/ic_select_on.png'
+import icRoll from './images/common/ic_roll.png'
+import icHelp from './images/home/ic_help.png'
 
 const images = {
   cpCheck,
   cpUnCheck,
   cpQrCodeDemo,
+  icRoll,
 
   //Home
   logo,
@@ -29,7 +32,8 @@ const images = {
   profile,
   profileDisable,
   icSelectOff,
-  icSelectOn
+  icSelectOn,
+  icHelp
 };
 
 export default images;
