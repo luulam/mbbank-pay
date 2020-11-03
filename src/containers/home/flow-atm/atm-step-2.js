@@ -62,7 +62,7 @@ const FlowAtmStep1 = ({ onNext, goBack }) => {
         {"Vui lòng kiểm tra lại thông tin thanh toán của bạn:"}
       </SubTitle>
 
-      <CtnForm className={"ctn-form"}>
+      <CtnForm>
         {listForm.map(({ title, value, classRight }, index) => {
           return (
             <CtnRowForm className="ctn-row" key={index}>
@@ -81,7 +81,7 @@ const FlowAtmStep1 = ({ onNext, goBack }) => {
         }
       />
 
-      <NavigationBottom onBack={goBack} onNext={onNextScreen} />
+      <NavigationBottom onBack={goBack} onNext={onNextScreen} nameNext={"Thanh toán"} />
     </Constant>
   );
 };

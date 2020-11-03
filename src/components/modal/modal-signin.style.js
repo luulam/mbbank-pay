@@ -39,7 +39,7 @@ export const Input = styled(InputCommon)``;
 export const TitleInput = styled(TitleCommon)`
   font-size: 1.1em;
   color: #333333;
-  margin-bottom: ${spacing[0]}
+  margin-bottom: ${spacing[0]};
 `;
 
 export const NotiError = styled(TextCommon)`

@@ -58,7 +58,7 @@ const FlowAtmStep1 = ({ onNext, goBack }) => {
         <InputRow style={{ flex: 2 }} placeholder="Nhập tên không đấu" />
       </CtnRowForm>
       <CtnRowForm className={"ctn-row"}>
-        <TitleRow>Mã xác nhận:</TitleRow>
+        <TitleRow inputCode>Mã xác nhận:</TitleRow>
         <ChangeCode />
       </CtnRowForm>
 

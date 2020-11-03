@@ -6,4 +6,5 @@ import { metric } from "theme";
 export const TabHome = styled(TabCommon)`
   background: white;
   border-radius: ${metric.radius};
+  margin-bottom: ${spacing[5]}
 `;

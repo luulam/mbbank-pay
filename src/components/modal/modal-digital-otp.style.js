@@ -9,9 +9,7 @@ import View from "../common/view";
 import { spacing, colors } from "theme";
 
 export const ContainerModal = styled(Modal)`
-  display: flex;
-  align-items: center;
-  justify-content: center;
+
 `;
 
 export const Card = styled(ViewCommon)`
@@ -19,7 +17,10 @@ export const Card = styled(ViewCommon)`
   border-radius: 6px;
   padding: ${spacing[3]};
 `;
-export const Title = styled(TitleCommon)``;
+export const Title = styled(TitleCommon)`
+  font-size: 20px;
+
+`;
 
 export const SubTitle = styled(TextCommon)`
   margin-bottom: ${spacing[2]};

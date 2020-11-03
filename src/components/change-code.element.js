@@ -36,7 +36,9 @@ export const CtnChangeCode = styled(ViewCommon)`
   margin-top: ${spacing[1]};
 `;
 
-export const TitleChangeCode = styled.span``;
+export const TitleChangeCode = styled.span`
+  font-size: 12px;
+`;
 
 export const ImgChangeCode = styled.img`
   margin-left: ${spacing[1]};

@@ -11,7 +11,7 @@ const Styles = styled.button`
   width: 200px;
   /* padding-left: ${spacing[7]};
   padding-right: ${spacing[7]}; */
-  font-size: 16px;
+  font-size: 14px;
   text-transform: uppercase;
   color: ${colors.White};
   outline: none;

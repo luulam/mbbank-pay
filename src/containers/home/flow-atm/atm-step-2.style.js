@@ -3,7 +3,12 @@ import { spacing, fonts } from "theme";
 import { ViewCommon, TitleCommon, TextCommon } from "components/index";
 
 export const Constant = styled(ViewCommon)`
-  padding: ${spacing[5]};
+  padding-left: ${spacing[4]};
+  padding-right: ${spacing[4]};
+  padding-top: ${spacing[4]};
+  padding-bottom: ${spacing[5]};
+
+
 `;
 
 export const Title = styled(TitleCommon)``;
@@ -12,7 +17,9 @@ export const SubTitle = styled(TextCommon)`
   margin-bottom: 16px;
 `;
 
-export const CtnForm = styled(ViewCommon)``;
+export const CtnForm = styled(ViewCommon)`
+  margin-bottom: 14px;
+`;
 
 export const CtnRowForm = styled(ViewCommon)`
   display: flex;

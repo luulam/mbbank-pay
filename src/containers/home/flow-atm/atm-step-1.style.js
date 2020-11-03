@@ -7,9 +7,13 @@ import {
   InputCommon,
   ImageCommon,
 } from "components/index";
+import { css } from "styled-components";
 
 export const Container = styled(ViewCommon)`
-  padding: ${spacing[5]};
+  padding-left: ${spacing[4]};
+  padding-right: ${spacing[4]};
+  padding-top: ${spacing[4]};
+  padding-bottom: ${spacing[5]};
 `;
 
 export const Title = styled(TitleCommon)``;
@@ -29,6 +33,13 @@ export const CtnRowForm = styled(ViewCommon)`
 export const TitleRow = styled(TextCommon)`
   flex: 1;
   color: #16161c;
+  ${(props) =>
+    props.inputCode
+      ? css`
+          align-self: flex-start;
+          margin-top: 12px;
+        `
+      : ``}
 `;
 
 export const InputRow = styled(InputCommon)``;

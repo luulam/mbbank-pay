@@ -4,66 +4,64 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from "react";
-import { ChangeCode } from "components";
 import {
   ContainerModal,
   Title,
   Card,
-  CtnInput,
   SubTitle,
-  ButtonBack,
   ButtonNext,
-  TitleInput,
   Input,
   NotiError,
   ImgQrCode,
   TitleQr,
   TextCountdown,
 } from "./modal-digital-otp.style";
-import Backdrop from "@material-ui/core/Backdrop";
 import images from "assets/images";
-const ModalDigitalOtp = ({ children, onDone, ...restProps }, ref) => {
-  const [open, setOpen] = useState(false);
 
-  const handleClose = () => {};
+const ModalDigitalOtp = forwardRef(
+  ({ children, onDone, ...restProps }, ref) => {
+    const [open, setOpen] = useState(false);
 
-  useImperativeHandle(ref, () => ({
-    show: () => {
-      setOpen(true);
-    },
-  }));
+    const handleClose = () => {};
 
-  const onNext = () => {
-    onDone();
-    setOpen(false);
-  };
+    useImperativeHandle(ref, () => ({
+      show: () => {
+        setOpen(true);
+      },
+    }));
 
-  useEffect(() => {}, [open]);
+    const onNext = () => {
+      onDone();
+      setOpen(false);
+    };
 
-  return (
-    <ContainerModal open={open} onClose={handleClose}>
-      <Card>
-        <Title>Xác thực Digital OTP</Title>
-        <SubTitle>
-          1. Sử dụng App ngân hàng MBBank trên thiết bị đã đăng ký dịch vụ
-          <br />
-          Digital OTP
-          <br />
-          2. Chọn xác thực giao dịch tại màn hình Login
-          <br />
-          3. Scan mã QR để nhận mã OTP
-          <br />
-          4. Nhập mã OTP để xác thực giao dịch
-        </SubTitle>
+    useEffect(() => {}, [open]);
 
-        <ImgQrCode src={images.cpQrCodeDemo} />
-        <TitleQr>Mã QR</TitleQr>
-        <TextCountdown>Mã xác thực sẽ hết sau (120s )</TextCountdown>
-        <Input placeholder="Nhập mã QR"></Input>
-        <ButtonNext onClick={onNext}>XÁC THỰC</ButtonNext>
-      </Card>
-    </ContainerModal>
-  );
-};
+    return (
+      <ContainerModal open={open} onClose={handleClose}>
+        <Card>
+          <Title>Xác thực Digital OTP</Title>
+          <SubTitle>
+            1. Sử dụng App ngân hàng MBBank trên thiết bị đã đăng ký dịch vụ
+            <br />
+            Digital OTP
+            <br />
+            2. Chọn xác thực giao dịch tại màn hình Login
+            <br />
+            3. Scan mã QR để nhận mã OTP
+            <br />
+            4. Nhập mã OTP để xác thực giao dịch
+          </SubTitle>
 
-export default forwardRef(ModalDigitalOtp);
+          <ImgQrCode src={images.cpQrCodeDemo} />
+          <TitleQr>Mã QR</TitleQr>
+          <TextCountdown>Mã xác thực sẽ hết sau (120s )</TextCountdown>
+          <Input placeholder="Nhập mã QR"></Input>
+          <ButtonNext onClick={onNext}>XÁC THỰC</ButtonNext>
+        </Card>
+      </ContainerModal>
+    );
+  }
+);
+
+export default ModalDigitalOtp;

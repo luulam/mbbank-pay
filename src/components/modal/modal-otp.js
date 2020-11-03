@@ -4,7 +4,14 @@ import React, {
   useImperativeHandle,
   useEffect,
 } from "react";
-import Styled from "./modal-otp.style";
+import Styled, {
+  ContainerModal,
+  Card,
+  Title,
+  SubTitle,
+  TextTime,
+  BtnSubmit
+} from "./modal-otp.style";
 import Backdrop from "@material-ui/core/Backdrop";
 import OtpInput from "../otp-input";
 import ButtonCommon from "../common/button";
@@ -52,32 +59,20 @@ const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
   useEffect(() => {}, []);
 
   return (
-    <Styled
-      aria-labelledby="transition-modal-title"
-      aria-describedby="transition-modal-description"
-      open={open}
-      onClose={handleClose}
-      closeAfterTransition
-      BackdropComponent={Backdrop}
-      BackdropProps={{ timeout: 500 }}
-    >
-      <div className="ctn">
-        <h1>Xác thực OTP</h1>
-        <span>
+    <ContainerModal open={open} onClose={handleClose}>
+      <Card className="ctn">
+        <Title>Xác thực OTP</Title>
+        <SubTitle>
           {"Chúng tôi đã gửi mã xác thực đến số điện thoại của bạn. "}
           <br />
           {"Nếu chưa nhận được, vui lòng chọn "}
           <a onClick={onReSendOtp}>Gửi lại mã</a>
-        </span>
+        </SubTitle>
         <OtpInput onDone={onDoneOtp} className={"otp-input"} />
-        <span
-          className={"txt-time"}
-        >{`Mã xác thực sẽ hết trong ( ${timeCountdown}s )`}</span>
-        <ButtonCommon className="btn-submit" onClick={handleClose}>
-          Xác thực
-        </ButtonCommon>
-      </div>
-    </Styled>
+        <TextTime>{`Mã xác thực sẽ hết trong ( ${timeCountdown}s )`}</TextTime>
+        <BtnSubmit onClick={handleClose}>Xác thực</BtnSubmit>
+      </Card>
+    </ContainerModal>
   );
 };
 

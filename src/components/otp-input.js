@@ -22,13 +22,16 @@ const RowInput = ({
   const input = useRef();
 
   const onChangeText = (e) => {
-    if (e.target.value.match(/^\d+$/g) || e.target.value === "") {
+    let is = e.target.value.match(/^\d+$/g) || e.target.value === "";
+    console.log("is", is);
+    if (is) {
       onChange(e.target.value);
       setValue(e.target.value);
     }
   };
 
   useEffect(() => {
+    console.log("Value  change", value);
     if (!value) return;
     if (value.match(/^\d+$/g)) {
       onNext && onNext();
@@ -43,10 +46,11 @@ const RowInput = ({
       input.current.focus();
     }
   }, [isActive]);
-  console.log("isShowcenter", isShowCenter);
   return (
     <CtnItemInput>
       <ItemInput
+        type="tel"
+        pattern="[0-9]*"
         ref={input}
         maxLength="1"
         onChange={onChangeText}
@@ -54,7 +58,6 @@ const RowInput = ({
         {...props}
         value={value}
       />
-      {isShowCenter ? <Line>-</Line> : undefined}
     </CtnItemInput>
   );
 };
@@ -101,7 +104,8 @@ const OtpInput = forwardRef(({ numberInput = 8, onDone, className }, ref) => {
   return (
     <Container className={className}>
       {Array.from(Array(numberInput).keys()).map((value, index) => {
-        return (
+        let isCenter = Math.floor(numberInput / 2) - 1 === index;
+        return [
           <RowInput
             key={index}
             isActive={isActive}
@@ -109,10 +113,11 @@ const OtpInput = forwardRef(({ numberInput = 8, onDone, className }, ref) => {
             onPrev={() => onPrev(index)}
             onFocus={() => onFocus(index)}
             onChange={(text) => onChange(text, index)}
-            isShowCenter={Math.floor(numberInput / 2) - 1 === index}
+            // isShowCenter={}
             index={index}
-          />
-        );
+          />,
+          isCenter ? <Line key={index} /> : undefined,
+        ];
       })}
     </Container>
   );
