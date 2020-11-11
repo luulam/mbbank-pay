@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "deep-bivouac-236316"
+  },
+  "targets": {
+    "deep-bivouac-236316": {
+      "hosting": {
+        "mbbank": [
+          "mbbank-pay"
+        ]
+      }
+    }
+  }
+}
