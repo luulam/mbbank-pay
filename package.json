@@ -1,0 +1,13 @@
+{
+  "name": "mb-pay-service",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start:client": "yarn --cwd=client start",
+    "start:service": "yarn --cwd=service start",
+    "dev": "concurrently \"yarn start:client\" \"yarn start:service\""
+  },
+  "dependencies": {
+    "concurrently": "^5.3.0"
+  }
+}

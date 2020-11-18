@@ -1,0 +1,14 @@
+version: "3"
+
+services:
+  api:
+    build: ./service
+    ports:
+      - "9000:9000"
+    container_name: mb-pay-service
+
+  client:
+    build: ./client
+    ports:
+      - "8000:8000"
+    container_name: mb-pay-client

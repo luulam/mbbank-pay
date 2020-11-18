@@ -1,18 +1,19 @@
-FROM node:12-alpine as builder
+FROM node:12
 
-WORKDIR /app
-COPY package.json /app/package.json
-RUN apk --no-cache add --virtual builds-deps build-base python
+# Create app directory
+WORKDIR /usr/src/app
+
+# Install app dependencies
+# A wildcard is used to ensure both package.json AND package-lock.json are copied
+# where available (npm@5+)
+COPY package*.json ./
+
 RUN npm install
-COPY . /app
-RUN npm run build
+# If you are building your code for production
+# RUN npm ci --only=production
 
-FROM node:12-alpine
-WORKDIR /app
-COPY --from=builder /app/dist /app
-COPY package.json /app/package.json
-RUN apk --no-cache add --virtual builds-deps build-base python
-RUN npm install --only=prod
+# Bundle app source
+COPY . .
 
-EXPOSE 808
-CMD ["npm", "start"]
+EXPOSE 9000
+CMD [ "npm","run", "start" ]
