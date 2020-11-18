@@ -35,12 +35,15 @@ const FlowAtmStep1 = ({ onNext, setTypePay, typePay }) => {
   };
 
   const _onNextScreen = () => {
-    // onNext && onNext(0);
-    axios.get("/api/helloworld").then(res=> {
-      console.log("res:",res)
-    }).catch(err=> {
-      console.log("err:",err)
-    })
+    onNext && onNext(0);
+    // fetch("http://localhost:9000/testAPI")
+    // .then(res => res.text())
+    // .then(res => this.setState({ apiResponse: res }));
+    // axios.get("/api/helloworld").then(res=> {
+    //   console.log("res:",res)
+    // }).catch(err=> {
+    //   console.log("err:",err)
+    // })
   };
 
   return (
