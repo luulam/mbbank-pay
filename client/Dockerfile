@@ -1,7 +1,17 @@
+
+# Step 1
 FROM node:lts-slim
-WORKDIR /usr/src/app
-COPY package.json yarn.lock ./
-RUN yarn
-COPY . ./
-EXPOSE 3000
-RUN yarn start
+
+RUN mkdir /app
+WORKDIR /app
+COPY package.json /app
+RUN npm install
+COPY . /app
+RUN npm run build
+
+ 
+# Stage 2
+
+FROM nginx:1.17.1-alpine
+
+COPY --from=build-step /app/build /usr/share/nginx/html
