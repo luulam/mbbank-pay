@@ -4,7 +4,7 @@ const CONFIG = require("../config").default;
 
 async function requestgetToken() {
   let data = new FormData();
-  
+
   data.append("grant_type", "client_credentials");
   let configParam = {
     method: "post",
@@ -23,12 +23,14 @@ async function requestgetToken() {
 }
 
 async function checkToken(req, res, next) {
+  console.log("checkToken B", CONFIG.token);
   if (CONFIG.token === null) {
     // CONFIG.token = "asdasdasdasdasd";
     let resAuth = await requestgetToken();
     let { access_token, token_type, expires_in } = resAuth.data;
     CONFIG.token = access_token;
   }
+  console.log("checkToken A", CONFIG.token);
   next();
 }
 

@@ -13,7 +13,7 @@ router.post("/auth-account", async function (req, res, next) {
     res.json(resAuthAccount);
   } catch (error) {
     console.log("/auth-account err: ", error);
-    res.status(500).send({ error });
+    res.status(500).send(error);
   }
 });
 

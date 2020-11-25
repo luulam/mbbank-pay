@@ -24,7 +24,7 @@ async function authAcount(param) {
   //   secureCode
   // }
   var data = JSON.stringify(param);
-  console.log("data",data)
+  
   let config = {
     method: "post",
     url: "http://10.1.27.43:8811/transaction-payments/v1.0/auth-account/post",

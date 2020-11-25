@@ -17,6 +17,8 @@ const HomeContainer = () => {
   const [curentTab, setCurentTab] = useState(0);
   const [typePay, setTypePay] = useState(0);
   const [typeVerify, setTypeVerify] = useState(1);
+
+  const [storeData, setStoreData] = useState({});
   const _onNextStep = (curent) => {
     if (typePay === 1) {
       switch (curent) {
@@ -39,6 +41,7 @@ const HomeContainer = () => {
   };
 
   const _onLoginSuccess = (res) => {
+    setStoreData(_.assign({}, { accountStep1: res }));
     setCurentTab(curentTab + 1);
   };
 
@@ -50,9 +53,11 @@ const HomeContainer = () => {
     if (curentTab < 1) return;
     setCurentTab(curentTab - 1);
   };
+
   const onDoneOtp = (value) => {
     console.log("Home:", location);
   };
+
   return (
     <>
       <HeaderBar />
@@ -64,21 +69,27 @@ const HomeContainer = () => {
             setTypePay={setTypePay}
             typePay={typePay}
           />
+
           {typePay === 0 ? (
             <AtmStep1 onNext={_onNextStep} goBack={_onGoBack} />
           ) : (
-            <AccountStep1 onNext={_onNextStep} goBack={_onGoBack} />
-          )}
+              <AccountStep1
+                onNext={_onNextStep}
+                goBack={_onGoBack}
+                data={storeData.accountStep1}
+              />
+            )}
 
           {typePay === 0 ? (
             <AtmStep2 onNext={_onNextStep} goBack={_onGoBack} />
           ) : (
-            <AccountStep2
-              onNext={_onNextStep}
-              goBack={_onGoBack}
-              onChangeVerify={_onChangeVerify}
-            />
-          )}
+              <AccountStep2
+                onNext={_onNextStep}
+                goBack={_onGoBack}
+                onChangeVerify={_onChangeVerify}
+                data={storeData.accountStep1}
+              />
+            )}
         </TabHome>
 
         <ModalOtp ref={modalOtp} onDone={onDoneOtp} />
