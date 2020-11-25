@@ -3,8 +3,12 @@ const router = express.Router();
 const ApiTransaction = require("../api/api-transaction");
 
 router.get("/capcha", async function (req, res, next) {
-  let resCaptra = await ApiTransaction.getCaptra();
-  res.json(resCaptra);
+  try {
+    let resCaptra = await ApiTransaction.getCaptra();
+    res.json(resCaptra);
+  } catch (error) {
+    res.status(500).send(error);
+  }
 });
 
 router.post("/auth-account", async function (req, res, next) {
@@ -12,7 +16,6 @@ router.post("/auth-account", async function (req, res, next) {
     let resAuthAccount = await ApiTransaction.authAcount(req.body);
     res.json(resAuthAccount);
   } catch (error) {
-    console.log("/auth-account err: ", error);
     res.status(500).send(error);
   }
 });

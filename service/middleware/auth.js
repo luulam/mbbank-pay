@@ -13,6 +13,7 @@ async function requestgetToken() {
       username: CONFIG.username,
       password: CONFIG.password,
     },
+    timeout: 5000,
     headers: {
       ...data.getHeaders(),
     },
@@ -25,10 +26,13 @@ async function requestgetToken() {
 async function checkToken(req, res, next) {
   console.log("checkToken B", CONFIG.token);
   if (CONFIG.token === null) {
-    // CONFIG.token = "asdasdasdasdasd";
-    let resAuth = await requestgetToken();
-    let { access_token, token_type, expires_in } = resAuth.data;
-    CONFIG.token = access_token;
+    try {
+      let resAuth = await requestgetToken();
+      let { access_token, token_type, expires_in } = resAuth.data;
+      CONFIG.token = access_token;
+    } catch (error) {
+      res.json(error)
+    }
   }
   console.log("checkToken A", CONFIG.token);
   next();
