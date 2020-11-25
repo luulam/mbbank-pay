@@ -10,5 +10,5 @@ services:
   client:
     build: ./client
     ports:
-      - "8000:8000"
+      - "80:80"
     container_name: mb-pay-client
