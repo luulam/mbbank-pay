@@ -3,13 +3,10 @@ import CONFIG from "constants/config";
 import * as AuthHelper from "helpers/auth.helper";
 import { cleanKeyNull } from "./util.helper";
 import _ from "lodash";
-import axios from 'axios'
+import axios from "axios";
 
-// GET TOKEN
-const profileAuth = AuthHelper.getProfile();
-const token = _.get(profileAuth, "token", false);
-
-const apiUrl = CONFIG.API_GATEWAY.BASE_URL;
+const PREFIX = "/api/v1";
+const apiUrl = CONFIG.API_GATEWAY.BASE_URL + PREFIX;
 
 const api = axios.create({
   baseURL: apiUrl,
@@ -18,62 +15,40 @@ const api = axios.create({
   },
 });
 
-export const setTokenAuthorization = (_token) => {
-  api.defaults.headers.common["Authorization"] = _token
-    ? `Bearer ${_token}`
-    : "";
-}
-
-setTokenAuthorization(token);
-
 //GET
 export const GET = (url, config) => {
   config = {
     ...config,
-    params: {
-      lang: AuthHelper.getLanguage(),
-    },
   };
-  cleanKeyNull(config.params);
 
   const request = api
     .get(url, config)
-    .then((res) => {
-      return mapData(res);
-    })
-    .catch((err) => {
-      mapError(err);
-    });
+    .then((res) => mapData(res))
+    .catch((err) => mapError(err));
   return request;
-}
+};
 
 //POST
-export const POST = (url, body, config) => {
+export const POST = (url, params, config) => {
   config = {
     ...config,
-    params: {
-      lang: AuthHelper.getLanguage(),
-    },
   };
-  cleanKeyNull(config.params);
 
   const request = api
-    .post(url, body, config)
+    .post(url, params, config)
     .then((res) => {
       return mapData(res);
     })
     .catch(mapError);
 
   return request;
-}
+};
 
 //PUT
 export const PUT = (url, body, config) => {
   config = {
     ...config,
-    params: {
-      lang: AuthHelper.getLanguage(),
-    },
+    params: {},
   };
   cleanKeyNull(config.params);
 
@@ -84,15 +59,13 @@ export const PUT = (url, body, config) => {
     })
     .catch(mapError);
   return request;
-}
+};
 
 // PATCH
 export const PATH = (url, body, config) => {
   config = {
     ...config,
-    params: {
-      lang: AuthHelper.getLanguage(),
-    },
+    params: {},
   };
   cleanKeyNull(config.params);
 
@@ -103,15 +76,13 @@ export const PATH = (url, body, config) => {
     })
     .catch(mapError);
   return request;
-}
+};
 
 // DELETE
 export const DELETE = (url, config) => {
   config = {
     ...config,
-    params: {
-      lang: AuthHelper.getLanguage(),
-    },
+    params: {},
   };
   cleanKeyNull(config.params);
 
@@ -122,12 +93,18 @@ export const DELETE = (url, config) => {
     })
     .catch(mapError);
   return request;
-}
+};
 
 // MAP params response
 export const mapData = (res) => {
-  return res.data;
-}
+  if (res.status === 200) {
+    if (res.data.status === 200) {
+      return res.data.data;
+    }
+    return res.data;
+  }
+  return res;
+};
 
 export const mapError = (err) => {
   if (err.response && err.response.status === 401) {
@@ -138,4 +115,4 @@ export const mapError = (err) => {
   if (err.response && err.response.data) {
     throw err;
   }
-}
+};

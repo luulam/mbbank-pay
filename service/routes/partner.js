@@ -1,9 +1,12 @@
+const express = require("express");
+const router = express.Router();
+const ApiTransaction = require("../api/api-transaction");
 
-var express = require("express");
-var router = express.Router();
-
-router.get("/capcha", function (req, res, next) {
-  res.send("API is working properly");
+router.get("/capcha", async function (req, res, next) {
+  console.log("reouter/captra");
+  let resCaptra = await ApiTransaction.getCaptra();
+  console.log("capcha", resCaptra);
+  res.json(resCaptra);
 });
 
 router.post("/auth-account", function (req, res, next) {

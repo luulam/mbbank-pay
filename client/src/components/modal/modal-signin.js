@@ -3,6 +3,7 @@ import React, {
   forwardRef,
   useImperativeHandle,
   useEffect,
+  useRef,
 } from "react";
 import { ChangeCode } from "components";
 import {
@@ -18,13 +19,18 @@ import {
   NotiError,
   CtnInputChangeCode,
 } from "./modal-signin.style";
-import Backdrop from "@material-ui/core/Backdrop";
+import { parseParam } from "helpers/url.helper";
+import ServiceTransaction from "services/transaction.service";
+import { BrowserRouter as Router, Switch, useLocation } from "react-router-dom";
 
-const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
+const ModalSignIn = forwardRef(({ children, onDone }, ref) => {
+  const location = useLocation();
+  const secureCode = parseParam(location.search).secureCode;
   const [open, setOpen] = useState(false);
-
+  const [inputUserName, setInputUserName] = useState("HANGO2");
+  const [inputPassword, setInputPassword] = useState("123456");
   const handleClose = () => {};
-
+  const refChangeCode = useRef();
   useImperativeHandle(ref, () => ({
     show: () => {
       setOpen(true);
@@ -36,7 +42,31 @@ const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
     setOpen(false);
   };
 
-  useEffect(() => {}, [open]);
+  const onLogin = () => {
+    let { captchaId, inputCode } = refChangeCode.current.getData();
+
+    ServiceTransaction.authAccount({
+      captcha: inputCode,
+      captchaid: captchaId,
+      user: inputUserName,
+      password: inputPassword,
+      paymentAction: "PAY",
+      secureCode,
+    })
+      .then((res) => {
+        onDone(res);
+        setOpen(false);
+        console.log("object res: ", res);
+      })
+      .catch((err) => {
+        console.log("object err:", err);
+      });
+  };
+
+  useEffect(() => {
+    if (open) {
+    }
+  }, [open]);
 
   return (
     <ContainerModal open={open} onClose={handleClose}>
@@ -48,24 +78,30 @@ const ModalSignIn = ({ children, onDone, ...restProps }, ref) => {
         </SubTitle>
         <CtnInput>
           <TitleInput>TÊN ĐĂNG NHẬP</TitleInput>
-          <Input></Input>
+          <Input
+            value={inputUserName}
+            onChange={(value) => setInputUserName(value)}
+          ></Input>
         </CtnInput>
         <CtnInput>
           <TitleInput>MẬT KHẨU</TitleInput>
-          <Input></Input>
+          <Input
+            value={inputPassword}
+            onChange={(value) => setInputPassword(value)}
+          ></Input>
         </CtnInput>
         <CtnInput>
           <TitleInput>MÃ XÁC NHẬN</TitleInput>
-          <ChangeCode />
+          <ChangeCode ref={refChangeCode} />
         </CtnInput>
 
         <NotiError>Thông tin đăng nhập/ mât khẩu không chính xác</NotiError>
 
-        <ButtonNext onClick={onNext}>TIẾP TỤC</ButtonNext>
+        <ButtonNext onClick={onLogin}>TIẾP TỤC</ButtonNext>
         <ButtonBack onClick={() => setOpen(false)}>HUỶ</ButtonBack>
       </Card>
     </ContainerModal>
   );
-};
+});
 
-export default forwardRef(ModalSignIn);
+export default ModalSignIn;

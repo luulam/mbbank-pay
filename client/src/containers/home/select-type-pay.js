@@ -35,14 +35,7 @@ const FlowAtmStep1 = ({ onNext, setTypePay, typePay }) => {
   };
 
   const _onNextScreen = () => {
-    // onNext && onNext(0);
-    axios("http://localhost:9000/transaction")
-      .then((res) => {
-        console.log("res:", res);
-      })
-      .catch((err) => {
-        console.log("err:", err);
-      });
+    onNext && onNext(0);
   };
 
   return (

@@ -1,4 +1,4 @@
-import React, { useState, useRef } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { TabCommon, ModalOtp, ModalSignIn, ModalDigitalOtp } from "components";
 import HeaderBar from "./component/header-bar";
 import StepBar from "./component/step-bar";
@@ -14,11 +14,9 @@ const HomeContainer = () => {
   const modalOtp = useRef();
   const modalSignin = useRef();
   const modalDigitalOtp = useRef();
-
   const [curentTab, setCurentTab] = useState(0);
   const [typePay, setTypePay] = useState(0);
   const [typeVerify, setTypeVerify] = useState(1);
-
   const _onNextStep = (curent) => {
     if (typePay === 1) {
       switch (curent) {
@@ -40,7 +38,7 @@ const HomeContainer = () => {
     }
   };
 
-  const _onLoginSuccess = () => {
+  const _onLoginSuccess = (res) => {
     setCurentTab(curentTab + 1);
   };
 
@@ -53,9 +51,8 @@ const HomeContainer = () => {
     setCurentTab(curentTab - 1);
   };
   const onDoneOtp = (value) => {
-    console.log("Home:", value);
+    console.log("Home:", location);
   };
-
   return (
     <>
       <HeaderBar />
