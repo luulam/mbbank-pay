@@ -24,6 +24,7 @@ async function requestgetToken() {
 }
 
 async function checkToken(req, res, next) {
+  if (req.noAuth) next()
   console.log("checkToken B", CONFIG.token);
   if (CONFIG.token === null) {
     try {
