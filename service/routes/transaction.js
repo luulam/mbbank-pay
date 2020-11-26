@@ -4,6 +4,7 @@ const ApiTransaction = require("../api/api-transaction");
 
 router.get("/capcha", async function (req, res, next) {
   try {
+    console.log("Get capcha")
     let resCaptra = await ApiTransaction.getCaptra();
     res.json(resCaptra);
   } catch (error) {
