@@ -12,10 +12,11 @@ RUN npm run build
  
 # Stage 2
 
-FROM nginx:1.17.1-alpine
-
+FROM nginx:stable-alpine
 COPY --from=builder /app/build /usr/share/nginx/html
-
+COPY nginx/nginx.conf /etc/nginx/conf.d/default.conf
+EXPOSE 9720
+CMD ["nginx", "-g", "daemon off;"]
 
 
 # ------------------------------------------------------
