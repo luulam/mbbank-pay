@@ -35,7 +35,7 @@ async function checkToken(req, res, next) {
       res.json(error)
     }
   }
-  console.log("checkToken A", CONFIG.token);
+  // console.log("checkToken A", CONFIG.token);
   next();
 }
 

@@ -15,18 +15,34 @@ router.get("/capcha", async function (req, res, next) {
 router.post("/auth-account", async function (req, res, next) {
   try {
     let resAuthAccount = await ApiTransaction.authAcount(req.body);
+    console.log("resAuthAccount", resAuthAccount)
     res.json(resAuthAccount);
   } catch (error) {
-    res.status(500).send(error);
+    console.log("resAuthAccount error", error)
+    res.status(500).send(error.response.data);
   }
 });
 
-router.post("/create-transaction", function (req, res, next) {
-  res.send("API is working properly");
+router.post("/create-transaction", async function (req, res, next) {
+  try {
+    let rescreateTransaction = await ApiTransaction.createTransaction(req.body);
+    console.log("create-transaction", rescreateTransaction)
+    res.json(rescreateTransaction);
+  } catch (error) {
+    console.log("create-transaction error", error)
+    res.status(500).send(error.response.data);
+  }
 });
 
-router.post("/verify-payment", function (req, res, next) {
-  res.send("API is working properly");
+router.post("/verify-payment", async function (req, res, next) {
+  try {
+    let resVerifiPayment = await ApiTransaction.verifyPayments(req.body);
+    console.log("verifyPayments: ", resVerifiPayment)
+    res.json(resVerifiPayment);
+  } catch (error) {
+    console.log("verifyPayments error:", error)
+    res.status(500).send(error.response.data);
+  }
 });
 
 module.exports = router;
