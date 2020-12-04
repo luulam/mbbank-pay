@@ -7,7 +7,7 @@ import { Helmet } from "react-helmet"
 import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from 'theme';
-
+import Loading from 'components/ref/loading'
 render(
     <>
         <Helmet titleTemplate="" defaultTitle="MBbank pay">
@@ -22,6 +22,8 @@ render(
             <CssBaseline />
             <GlobalStyle />
             <App />
+            
+            <Loading/>
         </ThemeProvider>
     </>, document.getElementById('root'))
 

@@ -21,17 +21,17 @@ import {
 } from "./modal-signin.style";
 import { parseParam } from "helpers/url.helper";
 import ServiceTransaction from "services/transaction.service";
-import { BrowserRouter as Router, Switch, useLocation } from "react-router-dom";
-
+import { useLocation } from "react-router-dom";
+import { RefLoading } from 'components/ref/loading'
 const ModalSignIn = forwardRef(({ children, onDone }, ref) => {
   const location = useLocation();
   const secureCode = parseParam(location.search).secureCode;
   const [open, setOpen] = useState(false);
   const [inputUserName, setInputUserName] = useState("HANGO2");
   const [inputPassword, setInputPassword] = useState("123456");
-  const handleClose = () => {};
+  const handleClose = () => { };
   const refChangeCode = useRef();
-  
+
   useImperativeHandle(ref, () => ({
     show: () => {
       setOpen(true);
@@ -45,7 +45,7 @@ const ModalSignIn = forwardRef(({ children, onDone }, ref) => {
 
   const onLogin = () => {
     let { captchaId, inputCode } = refChangeCode.current.getData();
-
+    RefLoading.show()
     ServiceTransaction.authAccount({
       captcha: inputCode,
       captchaid: captchaId,
@@ -55,11 +55,13 @@ const ModalSignIn = forwardRef(({ children, onDone }, ref) => {
       secureCode,
     })
       .then((res) => {
+        RefLoading.hide()
         onDone(res);
         setOpen(false);
         console.log("object res: ", res);
       })
       .catch((err) => {
+        RefLoading.hide()
         console.log("object err:", err);
       });
   };

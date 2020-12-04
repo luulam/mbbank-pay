@@ -37,7 +37,7 @@ const AccountStep1 = ({ onNext, goBack, data = { accountList: [] } }) => {
     contentPayment,
     accountList,
   } = data;
-
+  console.log("accountList:", data)
   const listForm = [
     {
       title: "Mã tham chiếu",
@@ -68,14 +68,14 @@ const AccountStep1 = ({ onNext, goBack, data = { accountList: [] } }) => {
     },
   ];
 
-  const listTypeVerify = accountList.map(
-    (value) =>
-      `${value.acctNm} / ${value.acctNo} / ${value.currentBalance ? value.currentBalance : ""
-      }`
-  );
+  const listTypeVerify = accountList ? accountList.map(
+    (value) => ({
+      value: `${value.acctNm} / ${value.acctNo} / ${value.currentBalance ? value.currentBalance : ""}`
+    })
+  ) : []
 
-  const _onChangeTypeVerify = (value) => {
-    setTypeVerify(value.target.value);
+  const _onChangeTypeVerify = (value) => { console.log("valeu :qwe",value)
+    setTypeVerify(value);
   };
   return (
     <Container>

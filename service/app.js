@@ -41,7 +41,7 @@ app.use(function (err, req, res, next) {
 });
 
 
-const PORT = 9888;
-const HOST = '0.0.0.0';
+const PORT = 9721;
+const HOST = '127.0.0.1';
 app.listen(PORT, HOST);
 console.log(`Running on http://${HOST}:${PORT}`);

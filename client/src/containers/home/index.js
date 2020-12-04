@@ -9,8 +9,13 @@ import AccountStep1 from "./flow-account/account-step-1";
 import AccountStep2 from "./flow-account/account-step-2";
 import { TabHome } from "./index.style";
 import { Container } from "@material-ui/core/";
+import { parseParam } from "helpers/url.helper";
+import { useLocation } from "react-router-dom";
 
 const HomeContainer = () => {
+  const location = useLocation();
+  const secureCode = parseParam(location.search).secureCode;
+
   const modalOtp = useRef();
   const modalSignin = useRef();
   const modalDigitalOtp = useRef();
@@ -18,7 +23,8 @@ const HomeContainer = () => {
   const [typePay, setTypePay] = useState(0);
   const [typeVerify, setTypeVerify] = useState(1);
 
-  const [storeData, setStoreData] = useState({});
+  const [dataLogin, setDataLogin] = useState({});
+
   const _onNextStep = (curent) => {
     if (typePay === 1) {
       switch (curent) {
@@ -41,7 +47,7 @@ const HomeContainer = () => {
   };
 
   const _onLoginSuccess = (res) => {
-    setStoreData(_.assign({}, { accountStep1: res }));
+    setDataLogin(_.assign({}, res));
     setCurentTab(curentTab + 1);
   };
 
@@ -58,6 +64,9 @@ const HomeContainer = () => {
     console.log("Home:", location);
   };
 
+  if (!secureCode) return <Container maxWidth="sm">
+    <p style={{ textAlign: "center" }}>Đường dẫn không đúng</p>
+  </Container>
   return (
     <>
       <HeaderBar />
@@ -76,7 +85,7 @@ const HomeContainer = () => {
               <AccountStep1
                 onNext={_onNextStep}
                 goBack={_onGoBack}
-                data={storeData.accountStep1}
+                data={dataLogin}
               />
             )}
 
@@ -87,7 +96,7 @@ const HomeContainer = () => {
                 onNext={_onNextStep}
                 goBack={_onGoBack}
                 onChangeVerify={_onChangeVerify}
-                data={storeData.accountStep1}
+                data={dataLogin}
               />
             )}
         </TabHome>

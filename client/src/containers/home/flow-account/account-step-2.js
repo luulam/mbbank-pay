@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
   ButtonCommon,
   TextCommon,
@@ -19,11 +19,28 @@ import {
 } from "./account-step-2.style";
 import images from "assets/images";
 import _ from "lodash";
+import { TYPE_VERIFY } from 'constants/app.const'
+
 const AccountStep2 = ({ onNext, goBack, data = {}, onChangeVerify }) => {
   const [typeVerify, setTypeVerify] = useState();
   const _onNextScreen = () => {
     onNext && onNext(2);
   };
+
+  const getListTypeVerify = () => {
+    let list = []
+    if (data.otp) list.push({ value: "Gửi mã OTP qua số điện thoại đăng ký", name: TYPE_VERIFY.SMS })
+    if (data.dotp) list.push({ value: "Sử dụng digital OTP", name: TYPE_VERIFY.DOTP })
+    return list
+  }
+
+  const _onChangeTypeVerify = (value, index) => {
+    console.log("asdasdas:", value)
+    onChangeVerify && onChangeVerify(_.findIndex(listTypeVerify, value));
+    setTypeVerify(value);
+  };
+
+  const listTypeVerify = getListTypeVerify()
 
   const {
     referenceCode,
@@ -67,15 +84,6 @@ const AccountStep2 = ({ onNext, goBack, data = {}, onChangeVerify }) => {
     },
   ];
 
-  const listTypeVerify = [
-    "Sử dụng digital OTP",
-    "Gửi mã OTP qua số điện thoại đăng ký",
-  ];
-  const _onChangeTypeVerify = (value) => {
-    onChangeVerify &&
-      onChangeVerify(_.findIndex(listTypeVerify, value.target.value));
-    setTypeVerify(value.target.value);
-  };
   return (
     <Container>
       <Title>Thông tin thanh toán</Title>
@@ -97,6 +105,7 @@ const AccountStep2 = ({ onNext, goBack, data = {}, onChangeVerify }) => {
       </CtnList>
 
       <CheckBoxCommon
+        defaultSelect={true}
         title={
           "Tôi đồng ý với Điều khoản thanh toán Dịch vụ công trực tuyển qua kênh điện tử MB"
         }

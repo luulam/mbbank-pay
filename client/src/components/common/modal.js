@@ -8,6 +8,7 @@ const ModalCommon = ({ children, ...restProps }) => {
       aria-labelledby="transition-modal-title"
       aria-describedby="transition-modal-description"
       closeAfterTransition
+      disableAutoFocus
       BackdropComponent={Backdrop}
       BackdropProps={{ timeout: 500 }}
       {...restProps}
