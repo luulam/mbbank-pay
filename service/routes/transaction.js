@@ -1,8 +1,9 @@
 const express = require("express");
 const router = express.Router();
 const ApiTransaction = require("../api/api-transaction");
+var AuthStrategy = require("../middleware/auth");
 
-router.get("/capcha", async function (req, res, next) {
+router.get("/capcha", AuthStrategy.checkToken, async function (req, res, next) {
   try {
     console.log("Get capcha")
     let resCaptra = await ApiTransaction.getCaptra();
@@ -12,7 +13,7 @@ router.get("/capcha", async function (req, res, next) {
   }
 });
 
-router.post("/auth-account", async function (req, res, next) {
+router.post("/auth-account", AuthStrategy.checkToken, async function (req, res, next) {
   try {
     let resAuthAccount = await ApiTransaction.authAcount(req.body);
     console.log("resAuthAccount", resAuthAccount)
@@ -23,7 +24,7 @@ router.post("/auth-account", async function (req, res, next) {
   }
 });
 
-router.post("/create-transaction", async function (req, res, next) {
+router.post("/create-transaction", AuthStrategy.checkToken, async function (req, res, next) {
   try {
     let rescreateTransaction = await ApiTransaction.createTransaction(req.body);
     console.log("create-transaction", rescreateTransaction)
@@ -34,7 +35,7 @@ router.post("/create-transaction", async function (req, res, next) {
   }
 });
 
-router.post("/verify-payment", async function (req, res, next) {
+router.post("/verify-payment", AuthStrategy.checkToken, async function (req, res, next) {
   try {
     let resVerifiPayment = await ApiTransaction.verifyPayments(req.body);
     console.log("verifyPayments: ", resVerifiPayment)

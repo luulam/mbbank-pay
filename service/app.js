@@ -15,13 +15,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 
-app.use(AuthStrategy.checkToken);
+
 
 // router
 const PREFIX = "/api/v1";
 
-app.use(PREFIX, indexRouter);
+app.use(PREFIX + "/", indexRouter);
 app.use(PREFIX + "/transaction", transcationRouter);
+// app.use(AuthStrategy.checkToken);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

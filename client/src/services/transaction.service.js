@@ -3,7 +3,7 @@ import { GET, POST } from "helpers/api.helper";
 const PREFIX = "transaction/";
 
 const getCapcha = async () => {
-  return await GET(PREFIX + "capcha", );
+  return await GET(PREFIX + "capcha",);
 };
 
 const authAccount = async (params) => {
