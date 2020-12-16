@@ -27,8 +27,8 @@ const ModalSignIn = forwardRef(({ children, onDone }, ref) => {
   const location = useLocation();
   const secureCode = parseParam(location.search).secureCode;
   const [open, setOpen] = useState(false);
-  const [inputUserName, setInputUserName] = useState("HANGO2");
-  const [inputPassword, setInputPassword] = useState("123456");
+  const [inputUserName, setInputUserName] = useState("");
+  const [inputPassword, setInputPassword] = useState("");
   const handleClose = () => { };
   const refChangeCode = useRef();
 
@@ -83,14 +83,14 @@ const ModalSignIn = forwardRef(({ children, onDone }, ref) => {
           <TitleInput>TÊN ĐĂNG NHẬP</TitleInput>
           <Input
             value={inputUserName}
-            onChange={(value) => setInputUserName(value)}
+            onChangeValue={(value) => setInputUserName(value)}
           ></Input>
         </CtnInput>
         <CtnInput>
           <TitleInput>MẬT KHẨU</TitleInput>
           <Input
             value={inputPassword}
-            onChange={(value) => setInputPassword(value)}
+            onChangeValue={(value) => setInputPassword(value)}
           ></Input>
         </CtnInput>
         <CtnInput>

@@ -43,6 +43,7 @@ app.use(function (err, req, res, next) {
 
 
 const PORT = 9721;
-const HOST = '127.0.0.1';
-app.listen(PORT, HOST);
-console.log(`Running on http://${HOST}:${PORT}`);
+// const HOST = 'localhost';
+app.listen(PORT, () => {
+  console.log(`Running on PORT: ${PORT}`);
+});
