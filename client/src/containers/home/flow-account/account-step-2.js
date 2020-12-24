@@ -20,69 +20,123 @@ import {
 import images from "assets/images";
 import _ from "lodash";
 import { TYPE_VERIFY } from 'constants/app.const'
+import { RefLoading } from 'components/ref/loading'
+import ServiceTransaction from "services/transaction.service";
+import { RefModalDigitalOtp } from 'components/modal/modal-digital-otp'
+import { RefModalOtp } from 'components/modal/modal-otp'
+import { RefNotify } from 'components/ref/notify'
 
-const AccountStep2 = ({ onNext, goBack, data = {}, onChangeVerify }) => {
-  const [typeVerify, setTypeVerify] = useState();
-  const _onNextScreen = () => {
-    onNext && onNext(2);
-  };
+const AccountStep2 = ({ onNext, goBack, navData, onChangeVerify }) => {
+  const [indexTypeVerify, setIndexTypeVerify] = useState(0);
+  const [nameTypeVerify, setNameTypeVerify] = useState();
+  const [infoTransaction, setInfoTransaction] = useState();
+  const dataLoginSuccess = navData.loginSuccess;
+  const accountSelect = navData.accountSelect
+  console.log("navData:", navData, "infoTransaction", infoTransaction)
 
   const getListTypeVerify = () => {
     let list = []
-    if (data.otp) list.push({ value: "Gửi mã OTP qua số điện thoại đăng ký", name: TYPE_VERIFY.SMS })
-    if (data.dotp) list.push({ value: "Sử dụng digital OTP", name: TYPE_VERIFY.DOTP })
+    if (dataLoginSuccess.otp) list.push({ value: "Gửi mã OTP qua số điện thoại đăng ký", name: TYPE_VERIFY.SMS })
+    if (dataLoginSuccess.dotp) list.push({ value: "Sử dụng digital OTP", name: TYPE_VERIFY.DOTP })
     return list
   }
-
-  const _onChangeTypeVerify = (value, index) => {
-    console.log("asdasdas:", value)
-    onChangeVerify && onChangeVerify(_.findIndex(listTypeVerify, value));
-    setTypeVerify(value);
-  };
-
   const listTypeVerify = getListTypeVerify()
-
-  const {
-    referenceCode,
-    paymentType,
-    bankReceiverCode,
-    collectName,
-    amount,
-    feesAmount,
-    totalAmount,
-    totalAmountInWords,
-    contentPayment,
-  } = data;
 
   const listForm = [
     {
       title: "Mã tham chiếu",
-      value: referenceCode,
+      value: dataLoginSuccess.referenceCode,
       classRight: "text-blue",
     },
-    { title: "Loại giao dịch:", value: collectName },
-    { title: "Tới:", value: bankReceiverCode },
-    { title: "Số tiền TT dịch vụ", value: amount },
+    { title: "Loại giao dịch:", value: dataLoginSuccess.collectName },
+    { title: "Tới:", value: dataLoginSuccess.bankReceiverCode },
+    { title: "Số tiền TT dịch vụ", value: dataLoginSuccess.amount },
     {
       title: "Phí giao dịch (bao gồm VAT):",
-      value: feesAmount,
+      value: dataLoginSuccess.feesAmount,
       classRight: "text-blue",
     },
-    { title: "Tổng tiền:", value: totalAmount, classRight: "text-blue" },
+    { title: "Tổng tiền:", value: dataLoginSuccess.totalAmount, classRight: "text-blue" },
     {
       title: "Số tiền bằng chữ:",
-      value: totalAmountInWords,
+      value: dataLoginSuccess.totalAmountInWords,
     },
     {
       title: "Nội dung",
-      value: contentPayment,
+      value: dataLoginSuccess.contentPayment,
     },
     {
       itle: "Hình thức thanh toán",
-      value: paymentType,
+      value: dataLoginSuccess.paymentType,
       classRight: "text-bold",
     },
   ];
+
+  // Function 
+
+  const onDoneInputOtp = (otp) => {
+    console.log("onDoneInputOtp", otp, "infoTransaction", infoTransaction)
+
+    ServiceTransaction.verifyPayment({ codeOTP: otp, secureCode: infoTransaction.secureCode })
+      .then(res => {
+        console.log("verifyPayment res:", res)
+      })
+      .catch(err => {
+        console.log("verifyPayment err:", err)
+      })
+  }
+
+  const _onNextScreen = () => {
+    console.log("AccountStep2 navData", navData, accountSelect)
+    // return;
+    if (indexTypeVerify === undefined) {
+      RefNotify.push({ message: "Vui lòng chọn hình thức xác thực" })
+      return
+    }
+    RefLoading.show()
+    ServiceTransaction.createTransaction({ account: accountSelect, secureCode: navData.loginSuccess.secureCode })
+      .then(res => {
+        RefLoading.hide()
+        console.log("res:", res)
+        setInfoTransaction(res)
+
+        if (listTypeVerify[indexTypeVerify].name === TYPE_VERIFY.SMS) {
+          RefModalOtp.show({
+            onDoneOtp: (otp) => {
+              console.log("onDoneInputOtp", otp, "infoTransaction", infoTransaction)
+
+              RefLoading.show()
+              ServiceTransaction.verifyPayment({ codeOTP: otp, secureCode: res.secureCode })
+                .then(verifyPaymentRes => {
+                  RefModalOtp.hide()
+                  RefLoading.hide()
+                  onNext && onNext(2, verifyPaymentRes.urlCallBack);
+                  console.log("verifyPayment res:", res)
+                })
+                .catch(verifyPaymentErr => {
+                  RefLoading.hide()
+                  console.log("verifyPayment err:", verifyPaymentErr)
+                })
+            }
+          })
+        }
+        if (listTypeVerify[indexTypeVerify].name === TYPE_VERIFY.DOTP) {
+          RefModalDigitalOtp.show()
+        }
+
+      })
+      .catch(err => {
+        RefLoading.hide()
+        console.log("Err", err)
+      })
+  };
+
+  const _onChangeTypeVerify = (value, index) => {
+    console.log("_onChangeTypeVerify", value, index, listTypeVerify[index].value)
+    onChangeVerify && onChangeVerify(_.findIndex(listTypeVerify, value));
+    setIndexTypeVerify(index);
+    setNameTypeVerify(listTypeVerify[index].value)
+  };
 
   return (
     <Container>
@@ -115,7 +169,7 @@ const AccountStep2 = ({ onNext, goBack, data = {}, onChangeVerify }) => {
 
       <SelectTypeVerify
         data={listTypeVerify}
-        value={typeVerify}
+        value={nameTypeVerify}
         onChange={_onChangeTypeVerify}
       />
 

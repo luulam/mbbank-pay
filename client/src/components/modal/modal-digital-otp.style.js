@@ -5,6 +5,7 @@ import InputCommon from "../common/input";
 import ButtonCommon from "../common/button";
 import ViewCommon from "../common/view";
 import Modal from "../common/modal";
+import QRCode from 'qrcode.react'
 import { spacing, colors } from "theme";
 
 export const ContainerModal = styled(Modal)``;
@@ -67,3 +68,11 @@ export const TextCountdown = styled.span`
 export const ButtonNext = styled(ButtonCommon)`
   width: 100%;
 `;
+
+export const ImgQRCode = styled(QRCode)`
+  align-self: center;
+  margin-top:${spacing[1]};
+  margin-bottom: ${spacing[1]};
+  box-shadow: 0px 0px 5px 0 rgba(0, 0, 0, 0.1);
+  padding:${spacing[3]};
+`

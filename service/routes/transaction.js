@@ -5,7 +5,7 @@ var AuthStrategy = require("../middleware/auth");
 
 router.get("/capcha", AuthStrategy.checkToken, async function (req, res, next) {
   try {
-    console.log("Get capcha")
+    console.log("/capcha")
     let resCaptra = await ApiTransaction.getCaptra();
     res.json(resCaptra);
   } catch (error) {
@@ -15,8 +15,9 @@ router.get("/capcha", AuthStrategy.checkToken, async function (req, res, next) {
 
 router.post("/auth-account", AuthStrategy.checkToken, async function (req, res, next) {
   try {
+    console.log("/auth-account")
     let resAuthAccount = await ApiTransaction.authAcount(req.body);
-    console.log("resAuthAccount", resAuthAccount)
+    console.log("/auth-account", resAuthAccount)
     res.json(resAuthAccount);
   } catch (error) {
     console.log("resAuthAccount error", error)

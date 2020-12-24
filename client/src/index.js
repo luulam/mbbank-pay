@@ -8,6 +8,9 @@ import { ThemeProvider } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
 import theme from 'theme';
 import Loading from 'components/ref/loading'
+import Notify from 'components/ref/notify'
+import ModalDigitalOtp from 'components/modal/modal-digital-otp'
+import ModalOtp from 'components/modal/modal-otp'
 render(
     <>
         <Helmet titleTemplate="" defaultTitle="MBbank pay">
@@ -22,8 +25,14 @@ render(
             <CssBaseline />
             <GlobalStyle />
             <App />
-            
-            <Loading/>
+
+
+            <ModalDigitalOtp />
+            <ModalOtp />
+
+            <Loading />
+            <Notify />
+
         </ThemeProvider>
     </>, document.getElementById('root'))
 

@@ -15,34 +15,38 @@ import {
   ImgQrCode,
   TitleQr,
   TextCountdown,
+  ImgQRCode
 } from "./modal-digital-otp.style";
 import images from "assets/images";
 
-const ModalDigitalOtp = forwardRef(
-  ({ children, onDone, ...restProps }, ref) => {
-    const [open, setOpen] = useState(false);
+export const RefModalDigitalOtp = {
+  show: () => { },
+}
 
-    const handleClose = () => {};
+const ModalDigitalOtp = () => {
+  const [open, setOpen] = useState(false);
+  const [data, setData] = useState({})
+  const handleClose = () => { };
 
-    useImperativeHandle(ref, () => ({
-      show: () => {
-        setOpen(true);
-      },
-    }));
+  const onNext = () => {
+    console.log("data:", data)
+    data.onDone && data.onDone();
+    setOpen(false);
+  };
 
-    const onNext = () => {
-      onDone();
-      setOpen(false);
-    };
+  useEffect(() => {
+    RefModalDigitalOtp.show = (param) => {
+      if (param) setData(param)
+      setOpen(true);
+    }
+  })
 
-    useEffect(() => {}, [open]);
-
-    return (
-      <ContainerModal open={open} onClose={handleClose}>
-        <Card>
-          <Title>Xác thực Digital OTP</Title>
-          <SubTitle>
-            1. Sử dụng App ngân hàng MBBank trên thiết bị đã đăng ký dịch vụ
+  return (
+    <ContainerModal open={open} onClose={handleClose}>
+      <Card>
+        <Title>Xác thực Digital OTP</Title>
+        <SubTitle>
+          1. Sử dụng App ngân hàng MBBank trên thiết bị đã đăng ký dịch vụ
             <br />
             Digital OTP
             <br />
@@ -52,16 +56,16 @@ const ModalDigitalOtp = forwardRef(
             <br />
             4. Nhập mã OTP để xác thực giao dịch
           </SubTitle>
+          
+        {data.idTransaction ? <ImgQRCode value={data.idTransaction} size={256} /> : undefined}
+        <TitleQr>Mã QR</TitleQr>
+        <TextCountdown>Mã xác thực sẽ hết sau (120s )</TextCountdown>
+        <Input placeholder="Nhập mã QR"></Input>
+        <ButtonNext onClick={onNext}>XÁC THỰC</ButtonNext>
+      </Card>
+    </ContainerModal>
+  );
+}
 
-          <ImgQrCode src={images.cpQrCodeDemo} />
-          <TitleQr>Mã QR</TitleQr>
-          <TextCountdown>Mã xác thực sẽ hết sau (120s )</TextCountdown>
-          <Input placeholder="Nhập mã QR"></Input>
-          <ButtonNext onClick={onNext}>XÁC THỰC</ButtonNext>
-        </Card>
-      </ContainerModal>
-    );
-  }
-);
 
 export default ModalDigitalOtp;

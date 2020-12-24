@@ -36,9 +36,7 @@ export const POST = (url, params, config) => {
 
   const request = api
     .post(url, params, config)
-    .then((res) => {
-      return mapData(res);
-    })
+    .then(mapData)
     .catch(mapError);
 
   return request;
@@ -97,6 +95,7 @@ export const DELETE = (url, config) => {
 
 // MAP params response
 export const mapData = (res) => {
+  console.log("Request success" + res.config.url + ":", res)
   if (res.status === 200) {
     if (res.data.status === 200) {
       return res.data.data;
@@ -107,12 +106,6 @@ export const mapData = (res) => {
 };
 
 export const mapError = (err) => {
-  if (err.response && err.response.status === 401) {
-    AuthHelper.logout();
-    throw err;
-  }
-
-  if (err.response && err.response.data) {
-    throw err;
-  }
+  console.log("Request error:" + err.config.url + ":", err)
+  throw err;
 };

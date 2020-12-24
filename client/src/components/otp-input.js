@@ -7,6 +7,7 @@ import React, {
 } from "react";
 import { Container, CtnItemInput, ItemInput, Line } from "./otp-input.element";
 import * as R from "ramda";
+import _ from 'lodash';
 // RowInput
 const RowInput = ({
   onNext,
@@ -23,7 +24,7 @@ const RowInput = ({
 
   const onChangeText = (e) => {
     let is = e.target.value.match(/^\d+$/g) || e.target.value === "";
-    console.log("is", is);
+    // console.log("is", is);
     if (is) {
       onChange(e.target.value);
       setValue(e.target.value);
@@ -31,7 +32,7 @@ const RowInput = ({
   };
 
   useEffect(() => {
-    console.log("Value  change", value);
+    // console.log("Value  change", value);
     if (!value) return;
     if (value.match(/^\d+$/g)) {
       onNext && onNext();
@@ -63,7 +64,7 @@ const RowInput = ({
 };
 
 // OtpInput
-const OtpInput = forwardRef(({ numberInput = 8, onDone, className }, ref) => {
+const OtpInput = forwardRef(({ numberInput = 8, onDone, className, onChangeValue }, ref) => {
   const [isActive, setIsActive] = useState(0);
   const [listDataInput, setListDataInput] = useState(
     Array.from(Array(numberInput))
@@ -88,7 +89,9 @@ const OtpInput = forwardRef(({ numberInput = 8, onDone, className }, ref) => {
   };
 
   const onChange = (value, index) => {
-    setListDataInput(R.update(index, value, listDataInput));
+    let newListDataInput = R.update(index, value, listDataInput)
+    setListDataInput(newListDataInput);
+    onChangeValue(_.join(newListDataInput, ''))
   };
 
   useEffect(() => {
@@ -100,7 +103,7 @@ const OtpInput = forwardRef(({ numberInput = 8, onDone, className }, ref) => {
     getValue,
   }));
 
-  const onFocus = (index) => {};
+  const onFocus = (index) => { };
   return (
     <Container className={className}>
       {Array.from(Array(numberInput).keys()).map((value, index) => {

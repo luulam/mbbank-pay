@@ -15,8 +15,16 @@ import Styled, {
 import Backdrop from "@material-ui/core/Backdrop";
 import OtpInput from "../otp-input";
 import ButtonCommon from "../common/button";
-const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
+
+export const RefModalOtp = {
+  show: () => { },
+  hide: () => { }
+}
+
+const ModalOtp = () => {
   const [open, setOpen] = useState(false);
+  const [data, setData] = useState({})
+  const [valueInput, setValueInput] = useState()
   const [timeCountdown, setTimeCountdown] = useState(0);
   let timer = null;
 
@@ -28,6 +36,10 @@ const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
     setOpen(false);
   };
 
+  const onDoneInputOtp = () => {
+    data.onDoneOtp && data.onDoneOtp(valueInput)
+  }
+
   const onStartCountDown = () => {
     clearTimeout(timer);
     setTimeCountdown(30);
@@ -37,11 +49,9 @@ const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
     onStartCountDown();
   };
 
-  useImperativeHandle(ref, () => ({
-    show: () => {
-      setOpen(true);
-    },
-  }));
+  const onChangeValueInputOtp = (value) => {
+    setValueInput(value)
+  }
 
   useEffect(() => {
     if (open) onStartCountDown();
@@ -56,7 +66,16 @@ const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
     }, 1000);
   }, [timeCountdown]);
 
-  useEffect(() => {}, []);
+  useEffect(() => {
+    RefModalOtp.show = (param) => {
+      if (param) setData(param)
+      setOpen(true);
+    }
+    RefModalOtp.hide = (param) => {
+      if (param) setData(param)
+      setOpen(false);
+    }
+  })
 
   return (
     <ContainerModal open={open} onClose={handleClose}>
@@ -68,12 +87,12 @@ const ViewCommon = ({ children, onDone, ...restProps }, ref) => {
           {"Nếu chưa nhận được, vui lòng chọn "}
           <a onClick={onReSendOtp}>Gửi lại mã</a>
         </SubTitle>
-        <OtpInput onDone={onDoneOtp} className={"otp-input"} />
+        <OtpInput onDone={onDoneInputOtp} className={"otp-input"} onChangeValue={onChangeValueInputOtp} />
         <TextTime>{`Mã xác thực sẽ hết trong ( ${timeCountdown}s )`}</TextTime>
-        <BtnSubmit onClick={handleClose}>Xác thực</BtnSubmit>
+        <BtnSubmit onClick={onDoneInputOtp}>Xác thực</BtnSubmit>
       </Card>
     </ContainerModal>
   );
 };
 
-export default forwardRef(ViewCommon);
+export default ModalOtp;

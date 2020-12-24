@@ -27,8 +27,8 @@ const ModalSignIn = forwardRef(({ children, onDone }, ref) => {
   const location = useLocation();
   const secureCode = parseParam(location.search).secureCode;
   const [open, setOpen] = useState(false);
-  const [inputUserName, setInputUserName] = useState("");
-  const [inputPassword, setInputPassword] = useState("");
+  const [inputUserName, setInputUserName] = useState("HANGO2");
+  const [inputPassword, setInputPassword] = useState("123456");
   const handleClose = () => { };
   const refChangeCode = useRef();
 

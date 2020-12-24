@@ -11,6 +11,10 @@ import { TabHome } from "./index.style";
 import { Container } from "@material-ui/core/";
 import { parseParam } from "helpers/url.helper";
 import { useLocation } from "react-router-dom";
+import { RefModalDigitalOtp } from 'components/modal/modal-digital-otp'
+import { RefModalOtp } from 'components/modal/modal-otp'
+import { Redirect } from 'react-router-dom'
+
 
 const HomeContainer = () => {
   const location = useLocation();
@@ -19,24 +23,28 @@ const HomeContainer = () => {
   const modalOtp = useRef();
   const modalSignin = useRef();
   const modalDigitalOtp = useRef();
+  const [isPaySuccess, setIsPaySuccess] = useState(false)
   const [curentTab, setCurentTab] = useState(0);
   const [typePay, setTypePay] = useState(0);
   const [typeVerify, setTypeVerify] = useState(1);
+  const [storeData, setStoreData] = useState({ loginSuccess: {}, infoTransaction: {} });
 
-  const [dataLogin, setDataLogin] = useState({});
-
-  const _onNextStep = (curent) => {
+  const _onNextStep = (curent, data) => {
+    // RefModalOtp.show()
     if (typePay === 1) {
       switch (curent) {
         case 0:
           modalSignin.current.show();
           break;
-        case 2:
-          if (typeVerify === 0) modalOtp.current.show();
-          else modalDigitalOtp.current.show();
-          break;
-        default:
+        case 1:
+          setStoreData(_.assign(storeData, { accountSelect: data }));
           setCurentTab(curent + 1);
+          break;
+        case 2:
+          // if (typeVerify === 0) modalOtp.current.show();
+          // else modalDigitalOtp.current.show();
+          setIsPaySuccess(true)
+          window.open(data, '_blank');
           break;
       }
     } else {
@@ -47,7 +55,7 @@ const HomeContainer = () => {
   };
 
   const _onLoginSuccess = (res) => {
-    setDataLogin(_.assign({}, res));
+    setStoreData(_.assign(storeData, { loginSuccess: res }));
     setCurentTab(curentTab + 1);
   };
 
@@ -60,10 +68,9 @@ const HomeContainer = () => {
     setCurentTab(curentTab - 1);
   };
 
-  const onDoneOtp = (value) => {
-    console.log("Home:", location);
-  };
-
+  if (isPaySuccess) return <Container maxWidth="sm">
+    <p style={{ textAlign: "center" }}>Thanh toán Thành công</p>
+  </Container>
   if (!secureCode) return <Container maxWidth="sm">
     <p style={{ textAlign: "center" }}>Đường dẫn không đúng</p>
   </Container>
@@ -85,7 +92,7 @@ const HomeContainer = () => {
               <AccountStep1
                 onNext={_onNextStep}
                 goBack={_onGoBack}
-                data={dataLogin}
+                navData={storeData}
               />
             )}
 
@@ -96,14 +103,13 @@ const HomeContainer = () => {
                 onNext={_onNextStep}
                 goBack={_onGoBack}
                 onChangeVerify={_onChangeVerify}
-                data={dataLogin}
+                navData={storeData}
               />
             )}
         </TabHome>
 
-        <ModalOtp ref={modalOtp} onDone={onDoneOtp} />
         <ModalSignIn ref={modalSignin} onDone={_onLoginSuccess} />
-        <ModalDigitalOtp ref={modalDigitalOtp} onDone={_onLoginSuccess} />
+
       </Container>
     </>
   );
