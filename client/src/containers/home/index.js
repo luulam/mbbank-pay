@@ -44,7 +44,7 @@ const HomeContainer = () => {
           // if (typeVerify === 0) modalOtp.current.show();
           // else modalDigitalOtp.current.show();
           setIsPaySuccess(true)
-          postMessage(JSON.stringify(data))
+          postMessage(data)
           // window.open(data, '_blank');
           break;
       }

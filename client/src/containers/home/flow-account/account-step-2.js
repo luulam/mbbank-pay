@@ -113,10 +113,14 @@ const AccountStep2 = ({ onNext, goBack, navData, onChangeVerify }) => {
               RefLoading.show()
               ServiceTransaction.verifyPayment({ codeOTP: otp, secureCode: res.secureCode, transactionId: "string" })
                 .then(verifyPaymentRes => {
+                  console.log("verifyPayment res:", verifyPaymentRes)
                   RefModalOtp.hide()
                   RefLoading.hide()
-                  onNext && onNext(2, verifyPaymentRes);
-                  console.log("verifyPayment res:", verifyPaymentRes)
+                  if (verifyPaymentRes.MaLoi === "00") {
+                    onNext && onNext(2, verifyPaymentRes.DuLieu);
+                  } else {
+                    RefNotify.push({ message: "Mã lỗi: " + verifyPaymentRes.MaLoi })
+                  }
                 })
                 .catch(verifyPaymentErr => {
                   RefLoading.hide()
@@ -134,10 +138,14 @@ const AccountStep2 = ({ onNext, goBack, navData, onChangeVerify }) => {
               RefLoading.show()
               ServiceTransaction.verifyPayment({ codeOTP: otp, secureCode: res.secureCode, transactionId: res.dotpId })
                 .then(verifyPaymentRes => {
+                  console.log("verifyPayment res:", res)
                   RefModalDigitalOtp.hide()
                   RefLoading.hide()
-                  onNext && onNext(2, verifyPaymentRes);
-                  console.log("verifyPayment res:", res)
+                  if (verifyPaymentRes.MaLoi === "00") {
+                    onNext && onNext(2, verifyPaymentRes.DuLieu);
+                  } else {
+                    RefNotify.push({ message: "Mã lỗi: " + verifyPaymentRes.MaLoi })
+                  }
                 })
                 .catch(verifyPaymentErr => {
                   RefLoading.hide()

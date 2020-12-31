@@ -45,7 +45,6 @@ export function formatTextVnToEn(
 */
 
 export function postMessage(value) {
-  let valueBase64 = window.btoa(value)
   let method = 'POST'
   let path = 'https://testthanhtoan.dichvucong.gov.vn/payment/paymentreturn_v2'
   // The rest of this code assumes you are not using a library.
@@ -58,7 +57,7 @@ export function postMessage(value) {
   const hiddenField = document.createElement('input');
   hiddenField.type = 'hidden';
   hiddenField.name = "data";
-  hiddenField.value = valueBase64;
+  hiddenField.value = value;
 
   form.appendChild(hiddenField);
 
