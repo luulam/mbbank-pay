@@ -4,6 +4,8 @@ var CONFIG = {
   username: "myclient",
   password: "secret",
   token: null,
+  timeGetToken: null,
+  timeExpiresToken: null
 };
 
 exports.default = CONFIG;

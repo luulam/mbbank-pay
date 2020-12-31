@@ -19,7 +19,6 @@ const createTransaction = async (params = { account, secureCode }) => {
 
 const verifyPayment = async (params = { codeOTP, secureCode }) => {
   console.log("verifyPayment:", params);
-  params.transactionId = "string"
   return await POST(PREFIX + "verify-payment", params);
 };
 

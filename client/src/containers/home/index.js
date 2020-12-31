@@ -14,7 +14,7 @@ import { useLocation } from "react-router-dom";
 import { RefModalDigitalOtp } from 'components/modal/modal-digital-otp'
 import { RefModalOtp } from 'components/modal/modal-otp'
 import { Redirect } from 'react-router-dom'
-
+import { postMessage } from 'helpers/util.helper'
 
 const HomeContainer = () => {
   const location = useLocation();
@@ -44,7 +44,8 @@ const HomeContainer = () => {
           // if (typeVerify === 0) modalOtp.current.show();
           // else modalDigitalOtp.current.show();
           setIsPaySuccess(true)
-          window.open(data, '_blank');
+          postMessage(JSON.stringify(data))
+          // window.open(data, '_blank');
           break;
       }
     } else {

@@ -21,23 +21,31 @@ import images from "assets/images";
 
 export const RefModalDigitalOtp = {
   show: () => { },
+  hide: () => { }
 }
 
 const ModalDigitalOtp = () => {
   const [open, setOpen] = useState(false);
   const [data, setData] = useState({})
+  const [inputDOTP, setInputDOTP] = useState('')
   const handleClose = () => { };
 
   const onNext = () => {
     console.log("data:", data)
-    data.onDone && data.onDone();
-    setOpen(false);
+    data.onDoneOtp && data.onDoneOtp(inputDOTP)
+
+    // data.onDone && data.onDone();
+    // setOpen(false);
   };
 
   useEffect(() => {
     RefModalDigitalOtp.show = (param) => {
       if (param) setData(param)
       setOpen(true);
+    }
+    RefModalDigitalOtp.hide = (param) => {
+      if (param) setData(param)
+      setOpen(false);
     }
   })
 
@@ -56,11 +64,15 @@ const ModalDigitalOtp = () => {
             <br />
             4. Nhập mã OTP để xác thực giao dịch
           </SubTitle>
-          
+
         {data.idTransaction ? <ImgQRCode value={data.idTransaction} size={256} /> : undefined}
         <TitleQr>Mã QR</TitleQr>
         <TextCountdown>Mã xác thực sẽ hết sau (120s )</TextCountdown>
-        <Input placeholder="Nhập mã QR"></Input>
+        <Input
+          value={inputDOTP}
+          onChangeValue={(value) => setInputDOTP(value)}
+          placeholder="Nhập mã QR"
+        />
         <ButtonNext onClick={onNext}>XÁC THỰC</ButtonNext>
       </Card>
     </ContainerModal>

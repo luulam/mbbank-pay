@@ -24,19 +24,26 @@ async function requestgetToken() {
 }
 
 async function checkToken(req, res, next) {
-  console.log("checkToken A", req.noAuth);
-  if (req.noAuth) next()
   console.log("checkToken B", CONFIG.token);
-  if (CONFIG.token === null) {
+  let isExpiresToken = false;
+
+  if (CONFIG.timeGetToken !== null && CONFIG.timeExpiresToken !== null) {
+    if (CONFIG.timeGetToken + CONFIG.timeExpiresToken >= Date.now()) {
+      isExpiresToken = true
+    }
+  }
+
+  if (CONFIG.token === null || isExpiresToken) {
     try {
       let resAuth = await requestgetToken();
       let { access_token, token_type, expires_in } = resAuth.data;
       CONFIG.token = access_token;
+      CONFIG.timeGetToken = Date.now()
+      CONFIG.timeExpiresToken = ParseInt(expires_in)
     } catch (error) {
       res.json(error)
     }
   }
-  // console.log("checkToken A", CONFIG.token);
   next();
 }
 

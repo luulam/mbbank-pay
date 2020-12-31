@@ -36,8 +36,14 @@ const AccountStep2 = ({ onNext, goBack, navData, onChangeVerify }) => {
 
   const getListTypeVerify = () => {
     let list = []
-    if (dataLoginSuccess.otp) list.push({ value: "Gửi mã OTP qua số điện thoại đăng ký", name: TYPE_VERIFY.SMS })
+    if (dataLoginSuccess.otp && dataLoginSuccess.authDevice === "tkn") {
+      list.push({ value: "Gửi mã Hard Token", name: TYPE_VERIFY.SMS })
+    }
+    if (dataLoginSuccess.otp) {
+      list.push({ value: "Gửi mã OTP qua số điện thoại đăng ký", name: TYPE_VERIFY.SMS })
+    }
     if (dataLoginSuccess.dotp) list.push({ value: "Sử dụng digital OTP", name: TYPE_VERIFY.DOTP })
+
     return list
   }
   const listTypeVerify = getListTypeVerify()
@@ -103,15 +109,14 @@ const AccountStep2 = ({ onNext, goBack, navData, onChangeVerify }) => {
         if (listTypeVerify[indexTypeVerify].name === TYPE_VERIFY.SMS) {
           RefModalOtp.show({
             onDoneOtp: (otp) => {
-              console.log("onDoneInputOtp", otp, "infoTransaction", infoTransaction)
-
+              // console.log("onDoneInputOtp", otp, "infoTransaction", infoTransaction)
               RefLoading.show()
-              ServiceTransaction.verifyPayment({ codeOTP: otp, secureCode: res.secureCode })
+              ServiceTransaction.verifyPayment({ codeOTP: otp, secureCode: res.secureCode, transactionId: "string" })
                 .then(verifyPaymentRes => {
                   RefModalOtp.hide()
                   RefLoading.hide()
-                  onNext && onNext(2, verifyPaymentRes.urlCallBack);
-                  console.log("verifyPayment res:", res)
+                  onNext && onNext(2, verifyPaymentRes);
+                  console.log("verifyPayment res:", verifyPaymentRes)
                 })
                 .catch(verifyPaymentErr => {
                   RefLoading.hide()
@@ -121,7 +126,25 @@ const AccountStep2 = ({ onNext, goBack, navData, onChangeVerify }) => {
           })
         }
         if (listTypeVerify[indexTypeVerify].name === TYPE_VERIFY.DOTP) {
-          RefModalDigitalOtp.show()
+          RefModalDigitalOtp.show({
+            idTransaction: res.dotpId,
+            onDoneOtp: (otp) => {
+              // console.log("onDoneInputOtp", otp, "infoTransaction", res.dotpId)
+
+              RefLoading.show()
+              ServiceTransaction.verifyPayment({ codeOTP: otp, secureCode: res.secureCode, transactionId: res.dotpId })
+                .then(verifyPaymentRes => {
+                  RefModalDigitalOtp.hide()
+                  RefLoading.hide()
+                  onNext && onNext(2, verifyPaymentRes);
+                  console.log("verifyPayment res:", res)
+                })
+                .catch(verifyPaymentErr => {
+                  RefLoading.hide()
+                  console.log("verifyPayment err:", verifyPaymentErr)
+                })
+            }
+          })
         }
 
       })
